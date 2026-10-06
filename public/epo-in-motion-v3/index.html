@@ -1,0 +1,295 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>EPO in Motion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Inter:wght@400..700&display=swap">
+<style>
+/* Layout: one fixed 1920x1080 stage, scaled to fit the window; slides cross-fade. Single dark look, like the deck. */
+:root{--bg:#070708;--ink:#F2EEE8;--muted:#A9A39A;--accent:#E5483D;--chrome:rgba(15,15,16,.72);color-scheme:dark}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);overflow:hidden;font-family:'Inter',Arial,sans-serif}
+#viewport{position:fixed;inset:0;overflow:hidden}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center;overflow:hidden;background:#0F0F10}
+#stage *{box-sizing:border-box;margin:0}
+.slide{position:absolute;left:0;top:0;width:1920px;height:1080px;display:flex;flex-direction:column;overflow:hidden;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s linear .6s}
+.slide.on{opacity:1;visibility:visible;transition:opacity .6s ease}
+.slide img,.slide video{display:block;object-fit:cover}
+.slide>*:not([style*="position:absolute"]):not([style*="position: absolute"]){position:relative}
+.slide>*{z-index:1}.slide>video{z-index:0}
+.slide div:not([style*="display"]){display:flex;flex-direction:column}
+.slide p{font-size:32px;line-height:1.4}
+.slide h1{font-size:96px;font-weight:600} .slide h2{font-size:64px;font-weight:600} .slide h3{font-size:44px;font-weight:600}
+.slide h1,.slide h2,.slide h3{text-wrap:balance}
+x-connector{display:block;flex:none;height:0;border-style:solid none none none;border-color:currentColor;position:relative}
+x-connector::after{content:"";position:absolute;right:-2px;top:-9px;border-left:14px solid currentColor;border-top:7.5px solid transparent;border-bottom:7.5px solid transparent;transform:translateY(-1.5px)}
+#bar{position:fixed;left:50%;bottom:max(16px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:var(--chrome);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:500 13px/1 'Inter',Arial,sans-serif;transition:opacity .4s}
+body.idle #bar{opacity:0}
+#bar button{appearance:none;border:0;background:transparent;color:var(--ink);font:inherit;height:34px;min-width:34px;padding:0 12px;border-radius:999px;cursor:pointer}
+#bar button:hover{background:rgba(242,238,232,.12)}
+#bar button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+#count{min-width:64px;text-align:center;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+#progress{position:fixed;left:0;top:0;height:3px;background:var(--accent);transition:width .4s ease}
+@media (prefers-reduced-motion:reduce){.slide,.slide.on{transition:none}}
+</style>
+<div id="progress"></div>
+<div id="viewport"><div id="stage">
+<section id="cover" class="slide" style="font-family:'Inter', Arial, sans-serif;background:#0F0F10;color:#F2EEE8;padding:128px;display:flex;flex-direction:column;justify-content:end;gap:32px">
+<video src="media/hague-dusk.mp4" poster="media/hague-dusk.jpg" muted loop playsinline preload="auto" aria-label="The EPO building in The Hague at dusk, its lit windows full of moving figures" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover;object-fit:cover"></video>
+<div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;background:linear-gradient(90deg, rgba(15,15,16,0.92) 0%, rgba(15,15,16,0.55) 45%, rgba(15,15,16,0) 75%)"></div>
+<img src="media/ivory-logo.png" alt="Ivory Productions" style="position:absolute;right:280px;top:64px;width:140px;height:38px;object-fit:contain"><div style="position:absolute;right:258px;top:64px;width:1px;height:38px;background:rgba(242,238,232,0.55)"></div><p style="position:absolute;right:128px;top:64px;width:110px;height:38px;font-family:'Inter', Arial, sans-serif;font-size:14px;font-weight:600;line-height:19px;letter-spacing:3px;text-transform:uppercase;color:#E6E1D9;white-space:nowrap">Creative<br>Studio</p>
+<p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#E5483D">EPO 50 &#160;·&#160; Since 1977</p>
+<h1 style="font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:144px;line-height:0.98;color:#F2EEE8">EPO<br>in motion.</h1>
+<p style="font-family:'Inter', Arial, sans-serif;font-size:32px;line-height:1.4;color:#BDB7AE;width:820px">Moving ideas forward. An anniversary film choreographed by the people of the European Patent Office.</p>
+
+</section>
+<section id="organisation" class="slide" style="font-family:'Inter', Arial, sans-serif;background:#0F0F10;color:#F2EEE8;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<img src="media/grid-building.jpg" alt="The EPO building at dusk, every window lit" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover">
+<div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;background:linear-gradient(180deg, rgba(15,15,16,0.88) 0%, rgba(15,15,16,0.55) 35%, rgba(15,15,16,0.6) 55%, rgba(15,15,16,0.95) 85%)"></div>
+<img src="media/ivory-logo.png" alt="Ivory Productions" style="position:absolute;right:280px;top:64px;width:140px;height:38px;object-fit:contain"><div style="position:absolute;right:258px;top:64px;width:1px;height:38px;background:rgba(242,238,232,0.55)"></div><p style="position:absolute;right:128px;top:64px;width:110px;height:38px;font-family:'Inter', Arial, sans-serif;font-size:14px;font-weight:600;line-height:19px;letter-spacing:3px;text-transform:uppercase;color:#E6E1D9;white-space:nowrap">Creative<br>Studio</p>
+<p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#E5483D">01 / The organisation</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:64px;line-height:1.05;color:#F2EEE8">An organisation<br>made of people.</h2>
+<p style="font-family:'Inter', Arial, sans-serif;font-size:32px;line-height:1.4;color:#D4CFC7;width:1240px">Knowledge and co-operation across Europe. Headquartered in Munich, with a branch in The Hague and offices in Berlin, Vienna and Brussels.</p>
+<div style="flex:1"></div>
+<div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:48px"><div style="display:flex;flex-direction:column;gap:12px;border-top:3px solid #F2EEE8;padding:24px 0px 0px 0px"><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:96px;line-height:1;color:#F2EEE8">~6,300</p><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;line-height:1.4;color:#D4CFC7">staff</p></div><div style="display:flex;flex-direction:column;gap:12px;border-top:3px solid #F2EEE8;padding:24px 0px 0px 0px"><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:96px;line-height:1;color:#F2EEE8">35</p><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;line-height:1.4;color:#D4CFC7">nationalities</p></div><div style="display:flex;flex-direction:column;gap:12px;border-top:3px solid #F2EEE8;padding:24px 0px 0px 0px"><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:96px;line-height:1;color:#F2EEE8">4,000+</p><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;line-height:1.4;color:#D4CFC7">scientists and engineers examining patents</p></div><div style="display:flex;flex-direction:column;gap:12px;border-top:3px solid #F2EEE8;padding:24px 0px 0px 0px"><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:96px;line-height:1;color:#F2EEE8">50</p><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;line-height:1.4;color:#D4CFC7">years in 2027</p></div></div>
+<p style="position:absolute;left:128px;bottom:64px;width:1200px;font-family:'Inter', Arial, sans-serif;font-size:24px;color:#A9A39A">Source: epo.org, October 2026</p>
+
+</section>
+<section id="insight" class="slide" style="background:#0f0f10;font-family:'Inter', Arial, sans-serif;color:#f2eee8">
+  <img src="media/grid-corridor.jpg" alt="A line of colleagues in an office corridor, each reaching forward in turn" style="position:absolute; left:0px; top:0px; width:1920px; height:1080px; object-fit:cover">
+  <div style="position:absolute; left:0px; top:0px; width:1920px; height:1080px; background:linear-gradient(270deg, rgba(15,15,16,0.94) 0%, rgba(15,15,16,0.82) 38%, rgba(15,15,16,0.15) 68%, rgba(15,15,16,0) 100%)"></div>
+  <img src="media/ivory-logo.png" alt="Ivory Productions" style="position:absolute;right:280px;top:64px;width:140px;height:38px;object-fit:contain"><div style="position:absolute;right:258px;top:64px;width:1px;height:38px;background:rgba(242,238,232,0.55)"></div><p style="position:absolute;right:128px;top:64px;width:110px;height:38px;font-family:'Inter', Arial, sans-serif;font-size:14px;font-weight:600;line-height:19px;letter-spacing:3px;text-transform:uppercase;color:#E6E1D9;white-space:nowrap">Creative<br>Studio</p>
+  <div style="position:absolute; top:220px; left:1000px; width:792px; height:700px; display:flex; flex-direction:column; justify-content:center; gap:32px">
+    <p style="font-family:'Inter', Arial, sans-serif; font-size:24px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:#e5483d">02 / The insight</p>
+    <h2 style="font-family:'Archivo', Arial, sans-serif; font-size:64px; font-weight:800; line-height:1.05; letter-spacing:-1px; text-transform:uppercase; color:#f2eee8">For 50 years, the EPO has been about movement.</h2>
+    <p style="font-family:'Inter', Arial, sans-serif; font-size:32px; line-height:1.4; color:#d4cfc7">Ideas move forward.<br>Knowledge moves between people.<br>Perspectives come together.<br>Thousands of people across Europe work as one.</p>
+    <p style="font-family:'Inter', Arial, sans-serif; font-size:32px; font-weight:600; line-height:1.4; color:#f2eee8">For the 50th anniversary, we make that movement visible through movement itself.</p>
+  </div>
+  
+</section>
+<section id="idea" class="slide" style="display:flex; flex-direction:column; gap:48px; justify-content:center; padding:128px; background:#0f0f10">
+  <img src="media/grid-reach.jpg" alt="Employees reaching skyward together on the plaza" style="position:absolute; top:0; left:0; width:1920px; height:1080px">
+  <div style="position:absolute; top:0; left:0; width:1920px; height:1080px; display:flex; flex-direction:column; background:linear-gradient(90deg, #0f0f10f0 0%, #0f0f10cc 45%, #0f0f1040 80%, #0f0f101a 100%)">
+  </div>
+  <img src="media/ivory-logo.png" alt="Ivory Productions" style="position:absolute; top:64px; right:280px; width:140px; height:38px; object-fit:contain">
+  <div style="position:absolute; top:64px; right:258px; width:1px; height:38px; display:flex; flex-direction:column; background:#f2eee88c">
+  </div>
+  <p style="position:absolute; top:64px; right:128px; width:110px; height:38px; font-family:Inter, Arial, sans-serif; font-size:14px; font-weight:600; line-height:1.36; letter-spacing:3px; text-transform:uppercase; white-space:nowrap; color:#e6e1d9">Creative<br>Studio</p>
+  <p style="font-family:Inter, Arial, sans-serif; font-size:24px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:#e5483d">03 / The idea</p>
+  <h1 style="width:1500px; font-family:Archivo, Arial, sans-serif; font-size:96px; font-weight:800; line-height:1.02; letter-spacing:-1px; text-transform:uppercase; color:#f2eee8">We turn the EPO into one great <span style="color:#e5483d">choreography.</span></h1>
+  <p style="width:1100px; font-family:Inter, Arial, sans-serif; font-size:32px; line-height:1.4; color:#d4cfc7">Performed by the people who make the organisation what it is.</p>
+  
+</section>
+<section id="ordinary" class="slide" style="font-family:'Inter', Arial, sans-serif;background:#0F0F10;color:#F2EEE8;padding:128px">
+<video src="media/archive.mp4" poster="media/archive.jpg" muted loop playsinline preload="auto" aria-label="Employees with files moving like dancers between archive shelves" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover;object-fit:cover"></video>
+<div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;background:linear-gradient(90deg, rgba(15,15,16,0.94) 0%, rgba(15,15,16,0.82) 36%, rgba(15,15,16,0.15) 62%, rgba(15,15,16,0) 100%)"></div>
+<img src="media/ivory-logo.png" alt="Ivory Productions" style="position:absolute;right:280px;top:64px;width:140px;height:38px;object-fit:contain"><div style="position:absolute;right:258px;top:64px;width:1px;height:38px;background:rgba(242,238,232,0.55)"></div><p style="position:absolute;right:128px;top:64px;width:110px;height:38px;font-family:'Inter', Arial, sans-serif;font-size:14px;font-weight:600;line-height:19px;letter-spacing:3px;text-transform:uppercase;color:#E6E1D9;white-space:nowrap">Creative<br>Studio</p>
+<div style="position:absolute;left:128px;top:170px;width:780px;height:780px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#E5483D">04 / How it unfolds</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:64px;line-height:1.05;color:#F2EEE8">From the ordinary to the extraordinary.</h2>
+<div style="display:flex;flex-direction:column;gap:8px"><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:26px;line-height:1.0;color:#F2EEE8;opacity:0.55">One gesture</p><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:30px;line-height:1.0;color:#F2EEE8;opacity:0.62">One team</p><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:34px;line-height:1.0;color:#F2EEE8;opacity:0.70">One department</p><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:40px;line-height:1.0;color:#F2EEE8;opacity:0.78">One building</p><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:46px;line-height:1.0;color:#F2EEE8;opacity:0.85">One city</p><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:54px;line-height:1.0;color:#F2EEE8;opacity:0.93">Europe</p><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:64px;line-height:1.0;color:#E5483D;opacity:1.00">Everyone</p></div>
+<p style="font-family:'Inter', Arial, sans-serif;font-size:24px;line-height:1.4;color:#D4CFC7">What looks like an ordinary working day slowly reveals itself as choreography.</p>
+</div>
+
+</section>
+<section id="nationalities" class="slide" style="font-family:'Inter', Arial, sans-serif;background:#0F0F10;color:#F2EEE8;padding:0px">
+<img src="media/nationalities.jpg" alt="Employees of many backgrounds, including a wheelchair user, dancing on the steps beneath the line 35 nationalities, one EPO" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover">
+<div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;background:linear-gradient(180deg, rgba(15,15,16,0.65) 0%, rgba(15,15,16,0) 22%, rgba(15,15,16,0) 48%, rgba(15,15,16,0.9) 80%, rgba(15,15,16,0.96) 100%)"></div>
+<img src="media/ivory-logo.png" alt="Ivory Productions" style="position:absolute;right:280px;top:64px;width:140px;height:38px;object-fit:contain"><div style="position:absolute;right:258px;top:64px;width:1px;height:38px;background:rgba(242,238,232,0.55)"></div><p style="position:absolute;right:128px;top:64px;width:110px;height:38px;font-family:'Inter', Arial, sans-serif;font-size:14px;font-weight:600;line-height:19px;letter-spacing:3px;text-transform:uppercase;color:#E6E1D9;white-space:nowrap">Creative<br>Studio</p>
+<p style="position:absolute;left:128px;top:64px;width:900px;font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#F2EEE8">05 / 35 nationalities</p>
+<h2 style="position:absolute;left:128px;bottom:120px;width:860px;font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:64px;line-height:1.05;color:#F2EEE8">Not uniformity.<br><span style="color:#E5483D">Coordination.</span></h2>
+<p style="position:absolute;left:1060px;bottom:120px;width:732px;font-family:'Inter', Arial, sans-serif;font-size:24px;line-height:1.45;color:#D4CFC7">At first every movement is individual, with different rhythms, gestures and people. Gradually they respond to one another. Groups form, patterns emerge, and individual gestures become one collective movement.</p>
+
+</section>
+<section id="iconic" class="slide" style="background:#0f0f10">
+  <video src="media/windows.mp4" poster="media/windows.jpg" muted loop playsinline preload="auto" aria-label="Lit office windows at dusk, a dancing figure in every window" style="position:absolute; top:0; left:0; width:1920px; height:1080px;object-fit:cover"></video>
+  <div style="position:absolute; top:0; left:0; width:1920px; height:1080px; display:flex; flex-direction:column; background:linear-gradient(180deg, #0f0f10a6 0%, #0f0f1000 22%, #0f0f1000 48%, #0f0f10e6 80%, #0f0f10f5 100%)">
+  </div>
+  <img src="media/ivory-logo.png" alt="Ivory Productions" style="position:absolute; top:64px; right:280px; width:140px; height:38px; object-fit:contain">
+  <div style="position:absolute; top:64px; right:258px; width:1px; height:38px; display:flex; flex-direction:column; background:#f2eee88c">
+  </div>
+  <p style="position:absolute; top:64px; right:128px; width:110px; height:38px; font-family:Inter, Arial, sans-serif; font-size:14px; font-weight:600; line-height:1.36; letter-spacing:3px; text-transform:uppercase; white-space:nowrap; color:#e6e1d9">Creative<br>Studio</p>
+  <p style="position:absolute; top:64px; left:128px; width:900px; font-family:Inter, Arial, sans-serif; font-size:24px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:#f2eee8">06 / The iconic image</p>
+  <h2 style="position:absolute; bottom:120px; left:128px; width:860px; font-family:Archivo, Arial, sans-serif; font-size:64px; font-weight:800; line-height:1.05; letter-spacing:-1px; text-transform:uppercase; color:#f2eee8">Buildings come alive.</h2>
+  <p style="position:absolute; bottom:120px; left:1060px; width:732px; font-family:Inter, Arial, sans-serif; font-size:24px; line-height:1.45; color:#d4cfc7">In The Hague we pull back until people become small figures in the glass façade. One person moves. Another responds. The movement travels from window to window and floor to floor, until the whole building seems to dance.</p>
+  
+</section>
+<section id="europe" class="slide" style="font-family:'Inter', Arial, sans-serif;background:#0F0F10;color:#F2EEE8;padding:128px;display:flex;flex-direction:column;gap:32px">
+<img src="media/plaza-flags.jpg" alt="Hundreds of employees dancing on the plaza in front of the EPO building and the European flags" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover">
+<div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;background:linear-gradient(90deg, rgba(15,15,16,0.9) 0%, rgba(15,15,16,0.7) 35%, rgba(15,15,16,0) 62%)"></div>
+<div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;background:linear-gradient(180deg, rgba(15,15,16,0) 60%, rgba(15,15,16,0.92) 90%)"></div>
+<img src="media/ivory-logo.png" alt="Ivory Productions" style="position:absolute;right:280px;top:64px;width:140px;height:38px;object-fit:contain"><div style="position:absolute;right:258px;top:64px;width:1px;height:38px;background:rgba(242,238,232,0.55)"></div><p style="position:absolute;right:128px;top:64px;width:110px;height:38px;font-family:'Inter', Arial, sans-serif;font-size:14px;font-weight:600;line-height:19px;letter-spacing:3px;text-transform:uppercase;color:#E6E1D9;white-space:nowrap">Creative<br>Studio</p>
+<div style="display:flex;flex-direction:column;gap:32px;width:820px">
+<p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#E5483D">07 / Across Europe</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:64px;line-height:1.05;color:#F2EEE8">One movement<br>across Europe.</h2>
+<p style="font-family:'Inter', Arial, sans-serif;font-size:32px;line-height:1.4;color:#D4CFC7">The choreography doesn't stop at one building. A movement starts in Munich and lands in The Hague. Someone turns a corner in Berlin, and the gesture continues in Vienna, then Brussels.</p>
+</div>
+<div style="flex:1"></div>
+<div style="display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid rgba(242,238,232,0.35);padding:32px 0px 0px 0px"><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:32px;text-transform:uppercase;color:#F2EEE8;white-space:nowrap">Munich</p><x-connector head="end" style="width:72px;color:#E5483D;border-width:3px"></x-connector><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:32px;text-transform:uppercase;color:#F2EEE8;white-space:nowrap">The Hague</p><x-connector head="end" style="width:72px;color:#E5483D;border-width:3px"></x-connector><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:32px;text-transform:uppercase;color:#F2EEE8;white-space:nowrap">Berlin</p><x-connector head="end" style="width:72px;color:#E5483D;border-width:3px"></x-connector><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:32px;text-transform:uppercase;color:#F2EEE8;white-space:nowrap">Vienna</p><x-connector head="end" style="width:72px;color:#E5483D;border-width:3px"></x-connector><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:32px;text-transform:uppercase;color:#F2EEE8;white-space:nowrap">Brussels</p></div>
+
+</section>
+<section id="whydance" class="slide" style="font-family:'Inter', Arial, sans-serif;background:#0F0F10;color:#F2EEE8;padding:128px 128px 160px">
+<video src="media/spheres.mp4" poster="media/spheres.jpg" muted loop playsinline preload="auto" aria-label="Employees dancing among large steel spheres in a wooded courtyard" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover;object-fit:cover"></video>
+<div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;background:linear-gradient(90deg, rgba(15,15,16,0.94) 0%, rgba(15,15,16,0.8) 34%, rgba(15,15,16,0.1) 60%, rgba(15,15,16,0) 100%)"></div>
+<img src="media/ivory-logo.png" alt="Ivory Productions" style="position:absolute;right:280px;top:64px;width:140px;height:38px;object-fit:contain"><div style="position:absolute;right:258px;top:64px;width:1px;height:38px;background:rgba(242,238,232,0.55)"></div><p style="position:absolute;right:128px;top:64px;width:110px;height:38px;font-family:'Inter', Arial, sans-serif;font-size:14px;font-weight:600;line-height:19px;letter-spacing:3px;text-transform:uppercase;color:#E6E1D9;white-space:nowrap">Creative<br>Studio</p>
+<div style="position:absolute;left:128px;top:170px;width:760px;height:720px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#E5483D">08 / Why dance</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:64px;line-height:1.05;color:#F2EEE8">Physical. Human.<br>Unexpected.<br>Joyful. <span style="color:#E5483D">Alive.</span></h2>
+<p style="font-family:'Inter', Arial, sans-serif;font-size:32px;line-height:1.4;color:#D4CFC7">An anniversary film about patents could easily turn retrospective and institutional. We want the opposite. Dance needs no translation. It brings energy, humour and emotion, and gives employees a reason to take part instead of just appearing.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:808px;font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#E5483D">The making-of becomes part of the idea</p>
+
+</section>
+<section id="language" class="slide" style="font-family:'Inter', Arial, sans-serif;background:#0F0F10;color:#F2EEE8;padding:128px;display:grid;grid-template-columns:1fr 760px;gap:96px;align-items:center">
+<img src="media/grid-aerial.jpg" alt="Seen from above, hundreds of employees form flowing patterns across a plaza" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover">
+<div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;background:rgba(15,15,16,0.72)"></div>
+<img src="media/ivory-logo.png" alt="Ivory Productions" style="position:absolute;right:280px;top:64px;width:140px;height:38px;object-fit:contain"><div style="position:absolute;right:258px;top:64px;width:1px;height:38px;background:rgba(242,238,232,0.55)"></div><p style="position:absolute;right:128px;top:64px;width:110px;height:38px;font-family:'Inter', Arial, sans-serif;font-size:14px;font-weight:600;line-height:19px;letter-spacing:3px;text-transform:uppercase;color:#E6E1D9;white-space:nowrap">Creative<br>Studio</p>
+<div style="display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#E5483D">09 / Movement language</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:64px;line-height:1.05;color:#F2EEE8">We don’t teach the EPO a dance.<br><span style="color:#E5483D">We turn its work into movement.</span></h2>
+<p style="font-family:'Inter', Arial, sans-serif;font-size:32px;line-height:1.4;color:#D4CFC7">A hand passes a document. Two people compare. A group gathers around an idea. With a leading choreographer, these real gestures become a movement language that belongs to the EPO and nobody else.</p>
+<p style="font-family:'Inter', Arial, sans-serif;font-size:24px;line-height:1.4;color:#D4CFC7">Small gestures grow into larger movements. Movements become patterns, and patterns become systems. In the end, hundreds of individuals create something only collaboration can achieve.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px"><div style="display:flex;gap:24px;align-items:baseline;border-bottom:1px solid rgba(242,238,232,0.25);padding:0px 0px 12px 0px"><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;color:#A9A39A;width:48px">01</p><p style="font-family:'Archivo', Arial, sans-serif;font-weight:500;font-size:40px;line-height:1;text-transform:uppercase;color:#F2EEE8">Examine</p></div><div style="display:flex;gap:24px;align-items:baseline;border-bottom:1px solid rgba(242,238,232,0.25);padding:0px 0px 12px 0px"><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;color:#A9A39A;width:48px">02</p><p style="font-family:'Archivo', Arial, sans-serif;font-weight:500;font-size:40px;line-height:1;text-transform:uppercase;color:#F2EEE8">Compare</p></div><div style="display:flex;gap:24px;align-items:baseline;border-bottom:1px solid rgba(242,238,232,0.25);padding:0px 0px 12px 0px"><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;color:#A9A39A;width:48px">03</p><p style="font-family:'Archivo', Arial, sans-serif;font-weight:500;font-size:40px;line-height:1;text-transform:uppercase;color:#F2EEE8">Collaborate</p></div><div style="display:flex;gap:24px;align-items:baseline;border-bottom:1px solid rgba(242,238,232,0.25);padding:0px 0px 12px 0px"><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;color:#A9A39A;width:48px">04</p><p style="font-family:'Archivo', Arial, sans-serif;font-weight:500;font-size:40px;line-height:1;text-transform:uppercase;color:#F2EEE8">Connect</p></div><div style="display:flex;gap:24px;align-items:baseline;border-bottom:1px solid rgba(242,238,232,0.25);padding:0px 0px 12px 0px"><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;color:#A9A39A;width:48px">05</p><p style="font-family:'Archivo', Arial, sans-serif;font-weight:500;font-size:40px;line-height:1;text-transform:uppercase;color:#F2EEE8">Exchange</p></div><div style="display:flex;gap:24px;align-items:baseline;border-bottom:1px solid rgba(242,238,232,0.25);padding:0px 0px 12px 0px"><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;color:#A9A39A;width:48px">06</p><p style="font-family:'Archivo', Arial, sans-serif;font-weight:500;font-size:40px;line-height:1;text-transform:uppercase;color:#F2EEE8">Pass on</p></div><div style="display:flex;gap:24px;align-items:baseline;border-bottom:1px solid rgba(242,238,232,0.25);padding:0px 0px 12px 0px"><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;color:#A9A39A;width:48px">07</p><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:40px;line-height:1;text-transform:uppercase;color:#E5483D">Move forward</p></div></div>
+
+</section>
+<section id="everyone" class="slide" style="font-family:'Inter', Arial, sans-serif;background:#0F0F10;color:#F2EEE8;padding:0px">
+<video src="media/crowd.mp4" poster="media/crowd-cantilever.jpg" muted loop playsinline preload="auto" aria-label="Hundreds of employees reaching upward together on the plaza" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover;object-fit:cover"></video>
+<div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;background:linear-gradient(180deg, rgba(15,15,16,0.6) 0%, rgba(15,15,16,0) 20%, rgba(15,15,16,0) 52%, rgba(15,15,16,0.88) 82%, rgba(15,15,16,0.95) 100%)"></div>
+<img src="media/ivory-logo.png" alt="Ivory Productions" style="position:absolute;right:280px;top:64px;width:140px;height:38px;object-fit:contain"><div style="position:absolute;right:258px;top:64px;width:1px;height:38px;background:rgba(242,238,232,0.55)"></div><p style="position:absolute;right:128px;top:64px;width:110px;height:38px;font-family:'Inter', Arial, sans-serif;font-size:14px;font-weight:600;line-height:19px;letter-spacing:3px;text-transform:uppercase;color:#E6E1D9;white-space:nowrap">Creative<br>Studio</p>
+<p style="position:absolute;left:128px;top:64px;width:900px;font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#F2EEE8">10 / The climax</p>
+<h2 style="position:absolute;left:128px;bottom:120px;width:900px;font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:80px;line-height:1.02;color:#F2EEE8">Everyone moves <span style="color:#E5483D">together.</span></h2>
+<p style="position:absolute;left:1100px;bottom:124px;width:692px;font-family:'Inter', Arial, sans-serif;font-size:24px;line-height:1.45;color:#D4CFC7">Hundreds of colleagues in one flowing formation. The camera rises, and individuals become one collective movement. The emotional climax of the film.</p>
+
+</section>
+<section id="participation" class="slide" style="font-family:'Inter', Arial, sans-serif;background:#0F0F10;color:#F2EEE8;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<img src="media/nationalities.jpg" alt="Employees of many backgrounds rehearsing together on the steps" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover">
+<div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;background:linear-gradient(90deg, rgba(15,15,16,0.95) 0%, rgba(15,15,16,0.85) 50%, rgba(15,15,16,0.55) 100%)"></div>
+<img src="media/ivory-logo.png" alt="Ivory Productions" style="position:absolute;right:280px;top:64px;width:140px;height:38px;object-fit:contain"><div style="position:absolute;right:258px;top:64px;width:1px;height:38px;background:rgba(242,238,232,0.55)"></div><p style="position:absolute;right:128px;top:64px;width:110px;height:38px;font-family:'Inter', Arial, sans-serif;font-size:14px;font-weight:600;line-height:19px;letter-spacing:3px;text-transform:uppercase;color:#E6E1D9;white-space:nowrap">Creative<br>Studio</p>
+<p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#E5483D">11 / Participation</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:64px;line-height:1.05;color:#F2EEE8;width:1100px">The employees create<br>the anniversary together.</h2>
+<p style="font-family:'Inter', Arial, sans-serif;font-size:32px;line-height:1.4;color:#BDB7AE;width:900px">Employees aren’t interviewed about what the EPO means to them. They become the protagonists. Learning and performing the choreography is an internal event in itself, connecting departments, generations, professions, nationalities and locations.</p>
+<p style="font-family:'Inter', Arial, sans-serif;font-size:32px;line-height:1.4;color:#F2EEE8;font-weight:600;width:900px">The anniversary begins long before the film is released.</p>
+
+</section>
+<section id="system" class="slide" style="font-family:'Inter', Arial, sans-serif;background:#0F0F10;color:#F2EEE8;padding:128px;display:flex;flex-direction:column;gap:32px">
+<img src="media/archive.jpg" alt="" style="position:absolute;left:0px;top:0px;width:384px;height:1080px;object-fit:cover"><img src="media/grid-building.jpg" alt="" style="position:absolute;left:384px;top:0px;width:384px;height:1080px;object-fit:cover"><img src="media/nationalities.jpg" alt="" style="position:absolute;left:768px;top:0px;width:384px;height:1080px;object-fit:cover"><img src="media/grid-aerial.jpg" alt="" style="position:absolute;left:1152px;top:0px;width:384px;height:1080px;object-fit:cover"><img src="media/grid-reach.jpg" alt="" style="position:absolute;left:1536px;top:0px;width:384px;height:1080px;object-fit:cover"><div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;background:linear-gradient(180deg, rgba(15,15,16,0.92) 0%, rgba(15,15,16,0.6) 32%, rgba(15,15,16,0.2) 50%, rgba(15,15,16,0.65) 72%, rgba(15,15,16,0.95) 100%)"></div><div style="position:absolute;left:383px;top:0px;width:2px;height:1080px;background:#0F0F10"></div><div style="position:absolute;left:767px;top:0px;width:2px;height:1080px;background:#0F0F10"></div><div style="position:absolute;left:1151px;top:0px;width:2px;height:1080px;background:#0F0F10"></div><div style="position:absolute;left:1535px;top:0px;width:2px;height:1080px;background:#0F0F10"></div>
+<img src="media/ivory-logo.png" alt="Ivory Productions" style="position:absolute;right:280px;top:64px;width:140px;height:38px;object-fit:contain"><div style="position:absolute;right:258px;top:64px;width:1px;height:38px;background:rgba(242,238,232,0.55)"></div><p style="position:absolute;right:128px;top:64px;width:110px;height:38px;font-family:'Inter', Arial, sans-serif;font-size:14px;font-weight:600;line-height:19px;letter-spacing:3px;text-transform:uppercase;color:#E6E1D9;white-space:nowrap">Creative<br>Studio</p>
+<p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#E5483D">12 / Campaign system</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:64px;line-height:1.05;color:#F2EEE8">One hero film.<br>Hundreds of moments.</h2>
+<p style="font-family:'Inter', Arial, sans-serif;font-size:32px;line-height:1.4;color:#D4CFC7;width:1300px">The monumental choreography is the hero film. But the idea is built as a system, not a single asset.</p>
+<h3 style="position:absolute;left:40px;top:780px;width:304px;font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:32px;text-transform:uppercase;color:#F2EEE8">Spaces</h3><p style="position:absolute;left:40px;top:830px;width:304px;font-family:'Inter', Arial, sans-serif;font-size:24px;line-height:1.4;color:#D4CFC7">Archive, library, canteen, office</p><h3 style="position:absolute;left:424px;top:780px;width:304px;font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:32px;text-transform:uppercase;color:#F2EEE8">Locations</h3><p style="position:absolute;left:424px;top:830px;width:304px;font-family:'Inter', Arial, sans-serif;font-size:24px;line-height:1.4;color:#D4CFC7">Munich, The Hague, Berlin, Vienna, Brussels</p><h3 style="position:absolute;left:808px;top:780px;width:304px;font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:32px;text-transform:uppercase;color:#F2EEE8">People</h3><p style="position:absolute;left:808px;top:830px;width:304px;font-family:'Inter', Arial, sans-serif;font-size:24px;line-height:1.4;color:#D4CFC7">35 nationalities, employee portraits</p><h3 style="position:absolute;left:1192px;top:780px;width:304px;font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:32px;text-transform:uppercase;color:#F2EEE8">Process</h3><p style="position:absolute;left:1192px;top:830px;width:304px;font-family:'Inter', Arial, sans-serif;font-size:24px;line-height:1.4;color:#D4CFC7">Rehearsals and behind the scenes</p><h3 style="position:absolute;left:1576px;top:780px;width:304px;font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:32px;text-transform:uppercase;color:#F2EEE8">Distribution</h3><p style="position:absolute;left:1576px;top:830px;width:304px;font-family:'Inter', Arial, sans-serif;font-size:24px;line-height:1.4;color:#D4CFC7">Social cut-downs and location edits</p>
+
+</section>
+<section id="possible" class="slide" style="display:flex; flex-direction:column; gap:32px; padding:128px; background:#0f0f10">
+  <img src="media/plaza-flags.jpg" alt="Employees dancing on the plaza in front of the EPO building and the European flags" style="position:absolute; top:0; left:0; width:1920px; height:1080px">
+  <div style="position:absolute; top:0; left:0; width:1920px; height:1080px; display:flex; flex-direction:column; background:linear-gradient(180deg, #0f0f10f0 0%, #0f0f10db 40%, #0f0f10eb 100%)">
+  </div>
+  <img src="media/ivory-logo.png" alt="Ivory Productions" style="position:absolute; top:64px; right:280px; width:140px; height:38px; object-fit:contain">
+  <div style="position:absolute; top:64px; right:258px; width:1px; height:38px; display:flex; flex-direction:column; background:#f2eee88c">
+  </div>
+  <p style="position:absolute; top:64px; right:128px; width:110px; height:38px; font-family:Inter, Arial, sans-serif; font-size:14px; font-weight:600; line-height:1.36; letter-spacing:3px; text-transform:uppercase; white-space:nowrap; color:#e6e1d9">Creative<br>Studio</p>
+  <p style="font-family:Inter, Arial, sans-serif; font-size:24px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:#e5483d">13 / What it makes possible</p>
+  <h2 style="font-family:Archivo, Arial, sans-serif; font-size:64px; font-weight:800; line-height:1.05; letter-spacing:-1px; text-transform:uppercase; color:#f2eee8">One idea. <span style="color:#e5483d">Many effects.</span></h2>
+  <div style="flex:1"></div>
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:48px">
+    <div style="display:flex; flex-direction:column; gap:12px; padding:20px 0 0; border-top:2px solid #f2eee859">
+      <p style="font-family:Archivo, Arial, sans-serif; font-size:24px; font-weight:800; color:#e5483d">01</p>
+      <h3 style="font-family:Archivo, Arial, sans-serif; font-size:32px; font-weight:800; line-height:1.1; text-transform:uppercase; color:#f2eee8; height:72px">Every nation on screen</h3>
+      <p style="font-family:Inter, Arial, sans-serif; font-size:24px; line-height:1.4; color:#d4cfc7">All 35 nationalities at the EPO, visible side by side.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px; padding:20px 0 0; border-top:2px solid #f2eee859">
+      <p style="font-family:Archivo, Arial, sans-serif; font-size:24px; font-weight:800; color:#e5483d">02</p>
+      <h3 style="font-family:Archivo, Arial, sans-serif; font-size:32px; font-weight:800; line-height:1.1; text-transform:uppercase; color:#f2eee8; height:72px">Five locations, one space</h3>
+      <p style="font-family:Inter, Arial, sans-serif; font-size:24px; line-height:1.4; color:#d4cfc7">Munich, The Hague, Berlin, Vienna and Brussels in one flow.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px; padding:20px 0 0; border-top:2px solid #f2eee859">
+      <p style="font-family:Archivo, Arial, sans-serif; font-size:24px; font-weight:800; color:#e5483d">03</p>
+      <h3 style="font-family:Archivo, Arial, sans-serif; font-size:32px; font-weight:800; line-height:1.1; text-transform:uppercase; color:#f2eee8; height:72px">Fun to take part</h3>
+      <p style="font-family:Inter, Arial, sans-serif; font-size:24px; line-height:1.4; color:#d4cfc7">Employees join in instead of posing. Rehearsals become an experience.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px; padding:20px 0 0; border-top:2px solid #f2eee859">
+      <p style="font-family:Archivo, Arial, sans-serif; font-size:24px; font-weight:800; color:#e5483d">04</p>
+      <h3 style="font-family:Archivo, Arial, sans-serif; font-size:32px; font-weight:800; line-height:1.1; text-transform:uppercase; color:#f2eee8; height:72px">A shared sense of community</h3>
+      <p style="font-family:Inter, Arial, sans-serif; font-size:24px; line-height:1.4; color:#d4cfc7">Departments, generations and professions move as one.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px; padding:20px 0 0; border-top:2px solid #f2eee859">
+      <p style="font-family:Archivo, Arial, sans-serif; font-size:24px; font-weight:800; color:#e5483d">05</p>
+      <h3 style="font-family:Archivo, Arial, sans-serif; font-size:32px; font-weight:800; line-height:1.1; text-transform:uppercase; color:#f2eee8; height:72px">Open to everyone</h3>
+      <p style="font-family:Inter, Arial, sans-serif; font-size:24px; line-height:1.4; color:#d4cfc7">Every role, age and ability can join in.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px; padding:20px 0 0; border-top:2px solid #f2eee859">
+      <p style="font-family:Archivo, Arial, sans-serif; font-size:24px; font-weight:800; color:#e5483d">06</p>
+      <h3 style="font-family:Archivo, Arial, sans-serif; font-size:32px; font-weight:800; line-height:1.1; text-transform:uppercase; color:#f2eee8; height:72px">Social media content</h3>
+      <p style="font-family:Inter, Arial, sans-serif; font-size:24px; line-height:1.4; color:#d4cfc7">Snippets, reels and location edits from one shoot.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px; padding:20px 0 0; border-top:2px solid #f2eee859">
+      <p style="font-family:Archivo, Arial, sans-serif; font-size:24px; font-weight:800; color:#e5483d">07</p>
+      <h3 style="font-family:Archivo, Arial, sans-serif; font-size:32px; font-weight:800; line-height:1.1; text-transform:uppercase; color:#f2eee8; height:72px">A human employer brand</h3>
+      <p style="font-family:Inter, Arial, sans-serif; font-size:24px; line-height:1.4; color:#d4cfc7">A modern, human workplace for staff and future talent.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px; padding:20px 0 0; border-top:2px solid #f2eee859">
+      <p style="font-family:Archivo, Arial, sans-serif; font-size:24px; font-weight:800; color:#e5483d">08</p>
+      <h3 style="font-family:Archivo, Arial, sans-serif; font-size:32px; font-weight:800; line-height:1.1; text-transform:uppercase; color:#f2eee8; height:72px">A lasting legacy</h3>
+      <p style="font-family:Inter, Arial, sans-serif; font-size:24px; line-height:1.4; color:#d4cfc7">Performed live at the anniversary event and used in onboarding.</p>
+    </div>
+  </div>
+  
+</section>
+<section id="roadmap" class="slide" style="font-family:'Inter', Arial, sans-serif;background:#0F0F10;color:#F2EEE8;padding:128px;display:flex;flex-direction:column;gap:28px">
+<img src="media/grid-reach.jpg" alt="Employees reaching skyward together on the plaza" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;object-fit:cover">
+<div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;background:linear-gradient(180deg, rgba(15,15,16,0.94) 0%, rgba(15,15,16,0.82) 45%, rgba(15,15,16,0.92) 100%)"></div>
+<img src="media/ivory-logo.png" alt="Ivory Productions" style="position:absolute;right:280px;top:64px;width:140px;height:38px;object-fit:contain"><div style="position:absolute;right:258px;top:64px;width:1px;height:38px;background:rgba(242,238,232,0.55)"></div><p style="position:absolute;right:128px;top:64px;width:110px;height:38px;font-family:'Inter', Arial, sans-serif;font-size:14px;font-weight:600;line-height:19px;letter-spacing:3px;text-transform:uppercase;color:#E6E1D9;white-space:nowrap">Creative<br>Studio</p>
+<p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#E5483D">14 / Roadmap</p>
+<h2 style="font-family:'Archivo', Arial, sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-1px;font-size:64px;line-height:1.05;color:#F2EEE8">Four ways to make it. <span style="color:#E5483D">One we recommend.</span></h2>
+<p style="font-family:'Inter', Arial, sans-serif;font-size:28px;line-height:1.4;color:#D4CFC7;width:1500px">Every option is built on the real EPO locations. AI can support individual shots in any of them; the heart of the film stays human.</p>
+<div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:32px;flex:1"><div style="display:flex;flex-direction:column;gap:16px;background:rgba(15,15,16,0.62);border-top:3px solid rgba(242,238,232,0.35);padding:32px;opacity:0.82"><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:24px;letter-spacing:2px;color:#E5483D">OPTION 01</p><h3 style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:32px;line-height:1.1;text-transform:uppercase;color:#F2EEE8">Choreographer + employees</h3><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;line-height:1.4;color:#D4CFC7">EPO employees learn and perform the choreography on location. The most authentic option: the rehearsals become an internal event.</p><div style="flex:1"></div><div style="display:flex;flex-direction:row;justify-content:space-between;gap:12px;border-top:1px solid rgba(242,238,232,0.25);padding:16px 0px 0px 0px"><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;color:#A9A39A">Staff involvement</p><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;color:#F2EEE8">High</p></div></div><div style="display:flex;flex-direction:column;gap:16px;background:rgba(15,15,16,0.62);border-top:3px solid rgba(242,238,232,0.35);padding:32px;opacity:0.82"><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:24px;letter-spacing:2px;color:#E5483D">OPTION 02</p><h3 style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:32px;line-height:1.1;text-transform:uppercase;color:#F2EEE8">Choreographer + professional dancers</h3><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;line-height:1.4;color:#D4CFC7">Professional dancers perform at the real EPO locations. Maximum precision and visual impact; staff watch rather than join.</p><div style="flex:1"></div><div style="display:flex;flex-direction:row;justify-content:space-between;gap:12px;border-top:1px solid rgba(242,238,232,0.25);padding:16px 0px 0px 0px"><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;color:#A9A39A">Staff involvement</p><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;color:#F2EEE8">Low</p></div></div><div style="display:flex;flex-direction:column;gap:16px;background:rgba(229,72,61,0.16);border:2px solid #E5483D;padding:30px"><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:24px;letter-spacing:2px;color:#E5483D">OPTION 03</p><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0F0F10;background:#E5483D;padding:6px 14px;border-radius:4px;align-self:start">Recommended</p><h3 style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:32px;line-height:1.1;text-transform:uppercase;color:#F2EEE8">Choreographer + employees + selected performers</h3><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;line-height:1.4;color:#D4CFC7">Real EPO employees carry the film. Selected professional performers take on the demanding passages. Authentic and precise.</p><div style="flex:1"></div><div style="display:flex;flex-direction:row;justify-content:space-between;gap:12px;border-top:1px solid rgba(242,238,232,0.25);padding:16px 0px 0px 0px"><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;color:#A9A39A">Staff involvement</p><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;color:#F2EEE8">High</p></div></div><div style="display:flex;flex-direction:column;gap:16px;background:rgba(15,15,16,0.62);border-top:3px solid rgba(242,238,232,0.35);padding:32px;opacity:0.82"><p style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:24px;letter-spacing:2px;color:#E5483D">OPTION 04</p><h3 style="font-family:'Archivo', Arial, sans-serif;font-weight:800;font-size:32px;line-height:1.1;text-transform:uppercase;color:#F2EEE8">Full AI video</h3><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;line-height:1.4;color:#D4CFC7">The film is generated with AI, built on the real EPO locations. Fast and flexible, but no one takes part.</p><div style="flex:1"></div><div style="display:flex;flex-direction:row;justify-content:space-between;gap:12px;border-top:1px solid rgba(242,238,232,0.25);padding:16px 0px 0px 0px"><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;color:#A9A39A">Staff involvement</p><p style="font-family:'Inter', Arial, sans-serif;font-size:24px;font-weight:600;color:#F2EEE8">None</p></div></div></div>
+
+</section>
+<section id="close" class="slide" style="display:flex; flex-direction:column; gap:40px; justify-content:end; padding:128px 128px 160px; background:#0f0f10">
+  <video src="media/hague-dusk.mp4" poster="media/hague-dusk.jpg" muted loop playsinline preload="auto" aria-label="The EPO building in The Hague at dusk" style="position:absolute; top:0; left:0; width:1920px; height:1080px; object-fit:cover;object-fit:cover"></video>
+  <div style="position:absolute; top:0; left:0; width:1920px; height:1080px; display:flex; flex-direction:column; background:linear-gradient(180deg, #0f0f1033 0%, #0f0f10eb 70%)">
+  </div>
+  <img src="media/ivory-logo.png" alt="Ivory Productions" style="position:absolute;right:280px;top:64px;width:140px;height:38px;object-fit:contain"><div style="position:absolute;right:258px;top:64px;width:1px;height:38px;background:rgba(242,238,232,0.55)"></div><p style="position:absolute;right:128px;top:64px;width:110px;height:38px;font-family:'Inter', Arial, sans-serif;font-size:14px;font-weight:600;line-height:19px;letter-spacing:3px;text-transform:uppercase;color:#E6E1D9;white-space:nowrap">Creative<br>Studio</p>
+  <h1 style="font-family:'Archivo', Arial, sans-serif;font-size:144px;font-weight:800;line-height:0.98;letter-spacing:-1px;text-transform:uppercase;color:#F2EEE8">EPO<br><span style="color:#E5483D">in motion.</span></h1>
+  <p style="font-family:'Inter', Arial, sans-serif;font-size:32px;line-height:1.4;color:#D4CFC7;width:1000px">50 years of people moving ideas forward. Together.</p>
+  <p style="position:absolute; bottom:64px; left:128px; width:1400px; font-family:Inter, Arial, sans-serif; font-size:24px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:#bdb7ae">EPO 50 &nbsp;·&nbsp; Since 1977 &nbsp;·&nbsp; A concept by Ivory Creative Studio</p>
+  
+</section>
+</div></div>
+<nav id="bar" aria-label="Slide controls">
+<button id="prev" type="button" aria-label="Previous slide">&#8592;</button>
+<span id="count" aria-live="polite">1 / 16</span>
+<button id="next" type="button" aria-label="Next slide">&#8594;</button>
+<button id="full" type="button">Fullscreen</button>
+</nav>
+<script>
+(function(){
+var slides=[].slice.call(document.querySelectorAll('.slide')),i=0,stage=document.getElementById('stage');
+function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform='translate(-50%,-50%) scale('+s+')';}
+function show(n){
+  i=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach(function(el,k){
+    var on=k===i;el.classList.toggle('on',on);
+    el.querySelectorAll('video').forEach(function(v){ if(on){try{v.currentTime=0}catch(e){} var p=v.play();if(p&&p.catch)p.catch(function(){});} else v.pause(); });
+  });
+  document.getElementById('count').textContent=(i+1)+' / '+slides.length;
+  document.getElementById('progress').style.width=((i+1)/slides.length*100)+'%';
+  if(location.hash!=='#'+slides[i].id) history.replaceState(null,'','#'+slides[i].id);
+}
+document.getElementById('prev').onclick=function(e){e.stopPropagation();show(i-1)};
+document.getElementById('next').onclick=function(e){e.stopPropagation();show(i+1)};
+document.getElementById('full').onclick=function(e){e.stopPropagation();var d=document.documentElement;
+  try{ if(!document.fullscreenElement) {var r=d.requestFullscreen&&d.requestFullscreen(); if(r&&r.catch) r.catch(function(){});} else document.exitFullscreen(); }catch(x){} };
+document.getElementById('viewport').onclick=function(e){ show(e.clientX<innerWidth*0.3?i-1:i+1) };
+addEventListener('keydown',function(e){
+  if(['ArrowRight','PageDown',' ','Enter'].indexOf(e.key)>-1){e.preventDefault();show(i+1)}
+  else if(['ArrowLeft','PageUp','Backspace'].indexOf(e.key)>-1){e.preventDefault();show(i-1)}
+  else if(e.key==='Home')show(0); else if(e.key==='End')show(slides.length-1);
+});
+var tx=null;addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
+addEventListener('touchend',function(e){if(tx===null)return;var d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>40)show(d<0?i+1:i-1);tx=null});
+var t;function wake(){document.body.classList.remove('idle');clearTimeout(t);t=setTimeout(function(){document.body.classList.add('idle')},2500)}
+addEventListener('mousemove',wake);addEventListener('keydown',wake);wake();
+addEventListener('resize',fit);addEventListener('hashchange',function(){var n=slides.findIndex(function(s){return '#'+s.id===location.hash});if(n>-1&&n!==i)show(n)});fit();
+var start=slides.findIndex(function(s){return '#'+s.id===location.hash});show(start<0?0:start);
+})();
+</script>
