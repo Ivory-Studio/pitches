@@ -15,7 +15,7 @@ body{margin:0;background:var(--bg);color:var(--ink);overflow:hidden;font-family:
 .slide img,.slide video{display:block;object-fit:cover}
 .slide>*:not([style*="position:absolute"]):not([style*="position: absolute"]){position:relative}
 .slide>*{z-index:1}.slide>video{z-index:0}
-.slide div{display:flex;flex-direction:column}
+.slide div:not([style*="display"]){display:flex;flex-direction:column}
 .slide p{font-size:32px;line-height:1.4}
 .slide h1{font-size:96px;font-weight:600} .slide h2{font-size:64px;font-weight:600} .slide h3{font-size:44px;font-weight:600}
 .slide h1,.slide h2,.slide h3{text-wrap:balance}
