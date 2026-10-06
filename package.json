@@ -1,0 +1,14 @@
+{
+  "name": "pitches",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Ivory Creative Studio pitch presentations (static site)",
+  "scripts": {
+    "dev": "serve public -l ${PORT:-3000}",
+    "start": "serve public -l ${PORT:-3000}",
+    "build": "echo 'Static site, nothing to build'"
+  },
+  "devDependencies": {
+    "serve": "14.2.4"
+  }
+}
