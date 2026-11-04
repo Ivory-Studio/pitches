@@ -1,0 +1,296 @@
+<!doctype html><html lang="de"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>LeGer · Vertical Series · Ivory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400..700&display=swap">
+<style>
+/* One fixed 1920x1080 stage, scaled to fit; slides cross-fade. Warm, quiet palette for a fashion brand. */
+:root{--bg:#120F0D;--panel:#1B1714;--ink:#F3ECE3;--soft:#D8CEC2;--muted:#A3978A;--accent:#C9A27E;--line:rgba(243,236,227,.22);--chrome:rgba(18,15,13,.72);color-scheme:dark}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);overflow:hidden;font-family:'Inter',Arial,sans-serif}
+#viewport{position:fixed;inset:0;overflow:hidden}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center;overflow:hidden;background:var(--bg)}
+#stage *{box-sizing:border-box;margin:0}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;padding:128px;display:flex;flex-direction:column;gap:36px;overflow:hidden;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s linear .6s;background:radial-gradient(120% 90% at 85% 0%,#2A221C 0%,var(--bg) 60%)}
+.slide.on{opacity:1;visibility:visible;transition:opacity .6s ease}
+.slide.warm{background:radial-gradient(110% 100% at 20% 100%,#3A2C21 0%,#1A1512 55%,var(--bg) 100%)}
+.slide.light{background:#EFE7DC;color:#1E1915}
+.mark{position:absolute;right:128px;top:64px;display:flex;align-items:center;gap:20px}
+.mark img{width:140px;height:38px;object-fit:contain}
+.mark i{width:1px;height:38px;background:rgba(243,236,227,.55)}
+.mark span{font-size:14px;font-weight:600;line-height:19px;letter-spacing:3px;text-transform:uppercase;color:#E6DED3}
+.light .mark img{filter:invert(1) brightness(.2)} .light .mark i{background:rgba(30,25,21,.45)} .light .mark span{color:#1E1915}
+.kicker{font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--accent)}
+.light .kicker{color:#8A6646}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;letter-spacing:-.5px;text-wrap:balance}
+h1{font-size:150px;line-height:.95} h2{font-size:84px;line-height:1.02} h3{font-size:44px;line-height:1.08}
+em{font-style:italic;color:var(--accent)} .light em{color:#8A6646}
+p{font-size:30px;line-height:1.45;color:var(--soft)} .light p{color:#3D342C}
+.lead{width:1250px}
+.small{font-size:24px;line-height:1.4;color:var(--muted)}
+.grow{flex:1}
+.grid{display:grid;gap:48px}
+.c2{grid-template-columns:1fr 1fr}.c3{grid-template-columns:repeat(3,1fr)}.c4{grid-template-columns:repeat(4,1fr)}
+.cell{display:flex;flex-direction:column;gap:12px;border-top:2px solid var(--line);padding-top:20px}
+.cell.hot{border-top-color:var(--accent)}
+.light .cell{border-top-color:rgba(30,25,21,.25)}
+.cell b{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:40px;line-height:1.05;color:var(--ink)}
+.light .cell b{color:#1E1915}
+.cell .num{font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;color:var(--accent);font-style:italic}
+.cell p{font-size:24px;line-height:1.4}
+.big{font-family:'Cormorant Garamond',Georgia,serif;font-size:96px;line-height:1;color:var(--ink)}
+.phones{display:flex;gap:26px;justify-content:space-between}
+.phone{width:200px;height:356px;border-radius:24px;border:2px solid rgba(243,236,227,.3);padding:16px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(170deg,#3B2E24 0%,#231C17 55%,#15110E 100%)}
+.phone:nth-child(2n){background:linear-gradient(170deg,#4A3A2C 0%,#2A211B 55%,#15110E 100%)}
+.phone .ep{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:28px;color:var(--accent)}
+.phone .t{font-size:18px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#E6DED3;line-height:1.3}
+.ph{border:1px dashed rgba(201,162,126,.5);display:flex;flex-direction:column;justify-content:end;padding:20px;background:linear-gradient(170deg,#2E241D 0%,#17130F 100%)}
+.ph span{font-size:18px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(201,162,126,.85);line-height:1.3}
+.tag{display:inline-block;align-self:flex-start;font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--bg);background:var(--accent);padding:8px 14px;border-radius:999px}
+table{border-collapse:collapse;width:100%;font-size:24px}
+th,td{text-align:left;padding:20px 24px 20px 0;border-bottom:1px solid var(--line);vertical-align:top;color:var(--soft)}
+th{font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+td:first-child{color:var(--muted);font-size:20px;letter-spacing:2px;text-transform:uppercase;font-weight:600;width:300px}
+td b{font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;font-weight:600;color:var(--ink)}
+.dots{letter-spacing:6px;color:var(--accent)}
+.foot{position:absolute;left:128px;bottom:64px;font-size:22px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--muted)}
+#bar{position:fixed;left:50%;bottom:max(16px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:var(--chrome);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:500 13px/1 'Inter',Arial,sans-serif;transition:opacity .4s}
+body.idle #bar{opacity:0}
+#bar button{appearance:none;border:0;background:transparent;color:var(--ink);font:inherit;height:34px;min-width:34px;padding:0 12px;border-radius:999px;cursor:pointer}
+#bar button:hover{background:rgba(243,236,227,.12)}
+#bar button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+#count{min-width:64px;text-align:center;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+#progress{position:fixed;left:0;top:0;height:3px;background:var(--accent);transition:width .4s ease;z-index:2}
+@media (prefers-reduced-motion:reduce){.slide,.slide.on{transition:none}}
+</style></head><body>
+<div id="progress"></div>
+<div id="viewport"><div id="stage">
+
+<!-- 1 Cover -->
+<section id="cover" class="slide warm" style="justify-content:end;gap:32px">
+<div class="mark"><img src="media/ivory-logo.png" alt="Ivory Productions"><i></i><span>Creative<br>Studio</span></div>
+<p class="kicker">LeGer by Lena Gercke &nbsp;·&nbsp; Branded Content</p>
+<h1>Eine Serie,<br><em>die man trägt.</em></h1>
+<p class="lead" style="font-size:36px">Drei Denkrichtungen für eine vertikale Branded-Content-Serie. Als Gesprächsgrundlage, nicht als fertiges Konzept.</p>
+</section>
+
+<!-- 2 Ausgangslage -->
+<section id="ausgangslage" class="slide">
+<div class="mark"><img src="media/ivory-logo.png" alt="Ivory Productions"><i></i><span>Creative<br>Studio</span></div>
+<p class="kicker">01 / Was wir sehen</p>
+<h2>Eine Marke mit Gesicht.<br><em>Und mit eigener Welt.</em></h2>
+<div class="grow"></div>
+<div class="grid c4">
+<div class="cell"><b>Personal Brand</b><p>Lena ist Gesicht und Haltung von LeGer. Das ist Reichweite und Vertrauen zugleich.</p></div>
+<div class="cell"><b>Vier Welten</b><p>Fashion, LeGer Studio, Home und Duft. Genug Stoff für mehr als eine Kampagne.</p></div>
+<div class="cell"><b>Eigener Shop</b><p>Direkter Draht zur Kundin. Content kann dort verkaufen, wo die Marge entsteht.</p></div>
+<div class="cell"><b>Community</b><p>Ein Ambassador- und Creator-Programm im Aufbau. Die Marke wird größer als eine Person.</p></div>
+</div>
+</section>
+
+<!-- 3 Chance -->
+<section id="chance" class="slide warm" style="justify-content:center">
+<div class="mark"><img src="media/ivory-logo.png" alt="Ivory Productions"><i></i><span>Creative<br>Studio</span></div>
+<p class="kicker">02 / Die Chance</p>
+<h2>Weg vom Einzelpost.<br><em>Hin zum Format, auf das man wartet.</em></h2>
+<p class="lead">Posts verpuffen nach einem Tag. Eine Serie baut Gewohnheit auf: Folge für Folge, Drop für Drop. Gedreht im Hochformat, gemacht für TikTok, Reels und Shorts, wo die Aufmerksamkeit heute liegt.</p>
+<div class="grid c3" style="width:1400px;margin-top:24px">
+<div class="cell hot"><b>Wiedererkennbar</b><p>Ein fester Titel, ein fester Rhythmus.</p></div>
+<div class="cell hot"><b>Shoppable</b><p>Jede Folge führt direkt zu einem Teil.</p></div>
+<div class="cell hot"><b>Skalierbar</b><p>Ein Dreh, eine ganze Saison Content.</p></div>
+</div>
+</section>
+
+<!-- 4 Übersicht -->
+<section id="richtungen" class="slide">
+<div class="mark"><img src="media/ivory-logo.png" alt="Ivory Productions"><i></i><span>Creative<br>Studio</span></div>
+<p class="kicker">03 / Drei Richtungen</p>
+<h2>Drei Wege zur Serie.</h2>
+<div class="grow"></div>
+<div class="grid c3" style="gap:64px">
+<div class="cell hot"><span class="num" style="font-size:56px">A</span><b>Der Drop</b><p>Founder-Doku. Lena als Unternehmerin, vom ersten Entwurf bis zum Launch.</p><p class="small">Dokumentarisch · nahbar · produktnah</p></div>
+<div class="cell hot"><span class="num" style="font-size:56px">B</span><b>Charlottenburg</b><p>Scripted Micro-Drama. Eine fiktionale Serie, in der LeGer die Welt ist, nicht die Werbung.</p><p class="small">Fiktional · seriell · süchtig machend</p></div>
+<div class="cell hot"><span class="num" style="font-size:56px">C</span><b>Ein Teil. Fünf Frauen.</b><p>Community-Format. Ein Teil, fünf echte Frauen, fünf Arten, es zu tragen.</p><p class="small">Creator-getrieben · vielfältig · laufend</p></div>
+</div>
+</section>
+
+<!-- 5 A -->
+<section id="a-drop" class="slide warm" style="display:grid;grid-template-columns:1fr 620px;gap:96px;align-items:center">
+<div class="mark"><img src="media/ivory-logo.png" alt="Ivory Productions"><i></i><span>Creative<br>Studio</span></div>
+<div style="display:flex;flex-direction:column;gap:32px">
+<p class="kicker">Richtung A / Founder-Doku</p>
+<h2>Der Drop.<br><em>Von der Skizze bis ins Regal.</em></h2>
+<p>Wir begleiten ein Teil aus LeGer Studio durch alle Stationen: Idee, Stoff, Fitting, Shooting, Launch. Lena als Unternehmerin, die entscheidet, zweifelt und am Ende liefert. Ehrlich, nah und ohne Hochglanz-Pose.</p>
+<p class="small">Warum es passt: Dokumentarisches Erzählen mit Lena ist bereits erprobt. Jede Folge zeigt ein Produkt, ohne eine Zeile Werbetext.</p>
+</div>
+<div class="ph" style="width:620px;height:760px"><span>Bild · Lena im Atelier, Stoffmuster und Skizzen</span></div>
+</section>
+
+<!-- 6 A Episoden -->
+<section id="a-episoden" class="slide">
+<div class="mark"><img src="media/ivory-logo.png" alt="Ivory Productions"><i></i><span>Creative<br>Studio</span></div>
+<p class="kicker">Richtung A / Staffelbogen</p>
+<h2>Sechs Folgen. <em>Ein Drop.</em></h2>
+<div class="grow"></div>
+<div class="phones">
+<div class="phone"><span class="ep">Folge 1</span><span class="t">Die Idee</span></div>
+<div class="phone"><span class="ep">Folge 2</span><span class="t">Der Stoff</span></div>
+<div class="phone"><span class="ep">Folge 3</span><span class="t">Das Fitting</span></div>
+<div class="phone"><span class="ep">Folge 4</span><span class="t">Das Shooting</span></div>
+<div class="phone"><span class="ep">Folge 5</span><span class="t">Die Nacht davor</span></div>
+<div class="phone"><span class="ep">Folge 6</span><span class="t">Launch</span></div>
+</div>
+<div class="grid c4">
+<div class="cell"><b>6 Folgen</b><p>à 60 bis 90 Sekunden</p></div>
+<div class="cell"><b>9:16</b><p>vertical first</p></div>
+<div class="cell"><b>Pro Drop</b><p>wiederholbar mit jeder Kollektion</p></div>
+<div class="cell"><b>Shop-Link</b><p>Waitlist vor, Kauf nach dem Launch</p></div>
+</div>
+</section>
+
+<!-- 7 B -->
+<section id="b-charlottenburg" class="slide warm" style="display:grid;grid-template-columns:1fr 620px;gap:96px;align-items:center">
+<div class="mark"><img src="media/ivory-logo.png" alt="Ivory Productions"><i></i><span>Creative<br>Studio</span></div>
+<div style="display:flex;flex-direction:column;gap:32px">
+<p class="kicker">Richtung B / Scripted Micro-Drama</p>
+<span class="tag">Unser stärkster Hebel</span>
+<h2>Charlottenburg.<br><em>Eine Serie, kein Spot.</em></h2>
+<p>Vier Freundinnen, eine Stadt, ein Winter. Liebe, Job, Neuanfang, erzählt in kurzen vertikalen Folgen mit Cliffhanger. LeGer ist die Welt, in der sie leben: was sie tragen, wie sie wohnen, wonach sie riechen. Lena hat einen Gastauftritt.</p>
+<p class="small">Warum es passt: Vertikale Kurzserien sind eines der am schnellsten wachsenden Formate. Und Düfte verkaufen sich seit jeher über Geschichten.</p>
+</div>
+<div class="ph" style="width:620px;height:760px"><span>Bild · Berliner Altbau bei Nacht, Fensterlicht</span></div>
+</section>
+
+<!-- 8 B Format -->
+<section id="b-format" class="slide">
+<div class="mark"><img src="media/ivory-logo.png" alt="Ivory Productions"><i></i><span>Creative<br>Studio</span></div>
+<p class="kicker">Richtung B / Das Format</p>
+<h2>Zehn Folgen.<br><em>Jede endet mit einer offenen Frage.</em></h2>
+<div class="grow"></div>
+<div class="grid c3" style="gap:48px 56px">
+<div class="cell"><span class="num">01</span><b>Fashion</b><p>Die Garderobe erzählt mit. Jede Figur hat ihren LeGer-Stil.</p></div>
+<div class="cell"><span class="num">02</span><b>Home</b><p>Die Wohnung der Heldin ist mit LeGer Home eingerichtet.</p></div>
+<div class="cell"><span class="num">03</span><b>Duft</b><p>Ein Duft als Erinnerung, als Spur, als Wendepunkt der Geschichte.</p></div>
+<div class="cell"><span class="num">04</span><b>Cameo</b><p>Lena taucht auf, nicht als Testimonial, sondern als Figur.</p></div>
+<div class="cell"><span class="num">05</span><b>Creator-Cast</b><p>Ensemble aus Schauspielerinnen und Creatorinnen mit eigener Reichweite.</p></div>
+<div class="cell"><span class="num">06</span><b>Shop the Scene</b><p>Jeder Look ist nach der Folge im Shop zu finden.</p></div>
+</div>
+</section>
+
+<!-- 9 C -->
+<section id="c-community" class="slide warm">
+<div class="mark"><img src="media/ivory-logo.png" alt="Ivory Productions"><i></i><span>Creative<br>Studio</span></div>
+<p class="kicker">Richtung C / Community-Format</p>
+<h2>Ein Teil. <em>Fünf Frauen.</em></h2>
+<p class="lead">Ein Teil der Kollektion, fünf echte Frauen: Ambassadors, Creatorinnen, Kundinnen. Jede trägt es auf ihre Art, in ihrem Alltag. Kurz, ehrlich, wiederholbar. Das Format, das LeGer größer macht als eine Person.</p>
+<div class="grow"></div>
+<div class="phones" style="justify-content:flex-start">
+<div class="phone"><span class="ep">Look 1</span><span class="t">Ins Büro</span></div>
+<div class="phone"><span class="ep">Look 2</span><span class="t">Zum Date</span></div>
+<div class="phone"><span class="ep">Look 3</span><span class="t">Mit Kind</span></div>
+<div class="phone"><span class="ep">Look 4</span><span class="t">Auf Reisen</span></div>
+<div class="phone"><span class="ep">Look 5</span><span class="t">Am Sonntag</span></div>
+</div>
+</section>
+
+<!-- 10 Vergleich -->
+<section id="vergleich" class="slide">
+<div class="mark"><img src="media/ivory-logo.png" alt="Ivory Productions"><i></i><span>Creative<br>Studio</span></div>
+<p class="kicker">04 / Im Vergleich</p>
+<h2>Was jede Richtung leistet.</h2>
+<table>
+<tr><th></th><th>A · Der Drop</th><th>B · Charlottenburg</th><th>C · Fünf Frauen</th></tr>
+<tr><td>Stärke</td><td><b>Nähe</b></td><td><b>Bindung</b></td><td><b>Breite</b></td></tr>
+<tr><td>Rolle von Lena</td><td>Im Mittelpunkt</td><td>Gastauftritt</td><td>Kuratorin, im Hintergrund</td></tr>
+<tr><td>Ziel</td><td>Abverkauf pro Drop</td><td>Markenwelt und Reichweite</td><td>Community und Creator-Programm</td></tr>
+<tr><td>Aufwand</td><td>Mittel</td><td>Hoch</td><td>Gering, laufend</td></tr>
+<tr><td>Kombinierbar</td><td colspan="3">A und C lassen sich aus einem Dreh bespielen. B kann als Staffel zum Saisonstart laufen.</td></tr>
+</table>
+</section>
+
+<!-- 11 Distribution -->
+<section id="distribution" class="slide warm">
+<div class="mark"><img src="media/ivory-logo.png" alt="Ivory Productions"><i></i><span>Creative<br>Studio</span></div>
+<p class="kicker">05 / Ausspielung</p>
+<h2>Gedreht für das Handy.<br><em>Gebaut für den Shop.</em></h2>
+<p class="lead">Ausgespielt über die Kanäle von LeGer, Lena und den Creatorinnen auf TikTok, Instagram und YouTube Shorts. Jede Folge verlinkt auf den eigenen Shop.</p>
+<div class="grow"></div>
+<div class="grid c4">
+<div class="cell hot"><span class="big">1</span><p>Drehblock, eine Staffel</p></div>
+<div class="cell hot"><span class="big">30+</span><p>Cutdowns für Paid und Organic</p></div>
+<div class="cell hot"><span class="big">3</span><p>Absender: Marke, Lena, Creatorinnen</p></div>
+<div class="cell hot"><span class="big">1</span><p>Ziel: der eigene Shop</p></div>
+</div>
+</section>
+
+<!-- 12 Bonus Weihnachten -->
+<section id="weihnachten" class="slide light" style="justify-content:center">
+<div class="mark"><img src="media/ivory-logo.png" alt="Ivory Productions"><i></i><span>Creative<br>Studio</span></div>
+<p class="kicker">Bonus / Ein Ritual als Format</p>
+<h2>Holly Jolly.<br><em>24 Türchen, vertikal.</em></h2>
+<p class="lead">Lenas Liebe zu Weihnachten ist bekannt. Daraus wird ein jährliches Format: ein vertikaler Adventskalender mit Looks, Home-Ideen, Duft und einer Überraschung pro Tag. Für 2026 knapp, als festes Ritual ab 2027 ideal.</p>
+<p class="dots">● ● ● ● ● ● ● ● ● ● ● ●</p>
+</section>
+
+<!-- 13 Nächste Schritte -->
+<section id="naechste-schritte" class="slide">
+<div class="mark"><img src="media/ivory-logo.png" alt="Ivory Productions"><i></i><span>Creative<br>Studio</span></div>
+<p class="kicker">06 / Gemeinsam schärfen</p>
+<h2>Was wir von Euch<br><em>wissen möchten.</em></h2>
+<div class="grow"></div>
+<div class="grid c2" style="gap:40px 80px">
+<div class="cell"><span class="num">01</span><b>Ziel</b><p>Abverkauf, Reichweite oder Markenaufbau für Studio, Home oder Duft?</p></div>
+<div class="cell"><span class="num">02</span><b>Lena</b><p>Im Mittelpunkt oder bewusst im Hintergrund?</p></div>
+<div class="cell"><span class="num">03</span><b>Timing</b><p>Welche Launches stehen im ersten Halbjahr 2027 an?</p></div>
+<div class="cell"><span class="num">04</span><b>Rahmen</b><p>Budget, Partner und wer heute Euren Bewegtbild-Content macht.</p></div>
+</div>
+</section>
+
+<!-- 14 Kontakt -->
+<section id="kontakt" class="slide warm" style="justify-content:end;gap:28px;padding-bottom:200px">
+<div class="mark"><img src="media/ivory-logo.png" alt="Ivory Productions"><i></i><span>Creative<br>Studio</span></div>
+<h1>Lasst uns<br><em>eine Serie machen.</em></h1>
+<div class="grid c3" style="width:1300px;margin-top:24px">
+<div class="cell hot"><b>Jan Linnartz</b><p>Euer Ansprechpartner</p></div>
+<div class="cell"><b>Ivory Productions</b><p>Creative Studio, München</p></div>
+<div class="cell"><b>ivory-productions.com</b><p>&nbsp;</p></div>
+</div>
+<p class="foot">LeGer &nbsp;·&nbsp; Vertical Series &nbsp;·&nbsp; Ein Konzeptansatz von Ivory Creative Studio</p>
+</section>
+
+</div></div>
+<nav id="bar" aria-label="Folien-Steuerung">
+<button id="prev" type="button" aria-label="Vorherige Folie">&#8592;</button>
+<span id="count" aria-live="polite">1 / 14</span>
+<button id="next" type="button" aria-label="Nächste Folie">&#8594;</button>
+<button id="full" type="button">Vollbild</button>
+</nav>
+<script>
+(function(){
+var slides=[].slice.call(document.querySelectorAll('.slide')),i=0,stage=document.getElementById('stage');
+function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform='translate(-50%,-50%) scale('+s+')';}
+function show(n){
+  i=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach(function(el,k){el.classList.toggle('on',k===i)});
+  document.getElementById('count').textContent=(i+1)+' / '+slides.length;
+  document.getElementById('progress').style.width=((i+1)/slides.length*100)+'%';
+  if(location.hash!=='#'+slides[i].id) history.replaceState(null,'','#'+slides[i].id);
+}
+document.getElementById('prev').onclick=function(e){e.stopPropagation();show(i-1)};
+document.getElementById('next').onclick=function(e){e.stopPropagation();show(i+1)};
+document.getElementById('full').onclick=function(e){e.stopPropagation();var d=document.documentElement;
+  try{ if(!document.fullscreenElement){var r=d.requestFullscreen&&d.requestFullscreen(); if(r&&r.catch) r.catch(function(){});} else document.exitFullscreen(); }catch(x){} };
+document.getElementById('viewport').onclick=function(e){ show(e.clientX<innerWidth*0.3?i-1:i+1) };
+addEventListener('keydown',function(e){
+  if(['ArrowRight','PageDown',' ','Enter'].indexOf(e.key)>-1){e.preventDefault();show(i+1)}
+  else if(['ArrowLeft','PageUp','Backspace'].indexOf(e.key)>-1){e.preventDefault();show(i-1)}
+  else if(e.key==='Home')show(0); else if(e.key==='End')show(slides.length-1);
+});
+var tx=null;addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
+addEventListener('touchend',function(e){if(tx===null)return;var d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>40)show(d<0?i+1:i-1);tx=null});
+var t;function wake(){document.body.classList.remove('idle');clearTimeout(t);t=setTimeout(function(){document.body.classList.add('idle')},2500)}
+addEventListener('mousemove',wake);addEventListener('keydown',wake);wake();
+addEventListener('resize',fit);addEventListener('hashchange',function(){var n=slides.findIndex(function(s){return '#'+s.id===location.hash});if(n>-1&&n!==i)show(n)});fit();
+var start=slides.findIndex(function(s){return '#'+s.id===location.hash});show(start<0?0:start);
+})();
+</script>
+</body></html>

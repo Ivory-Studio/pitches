@@ -9,3 +9,4 @@ Site files live in `public/`. Run `npm run dev` for a local preview.
 - `/epo-in-motion-v3/` · EPO in Motion v3 (original plus the strongest elements of v2)
 - `/byd-zero-degrees/` · BYD Zero Degrees (vertical adventure series, Iceland)
 - `/changan-zero-degrees/` · Changan Zero Degrees (2-slide short version, Deepal G318)
+- `/leger-vertical/` · LeGer by Lena Gercke (vertical branded content series, three directions, German)
