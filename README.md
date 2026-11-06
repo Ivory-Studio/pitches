@@ -10,3 +10,4 @@ Site files live in `public/`. Run `npm run dev` for a local preview.
 - `/byd-zero-degrees/` · BYD Zero Degrees (vertical adventure series, Iceland)
 - `/changan-zero-degrees/` · Changan Zero Degrees (2-slide short version, Deepal G318)
 - `/leger-vertical/` · LeGer by Lena Gercke (vertical branded content series, three directions, German)
+- `/audi-modern-family/` · Audi – Modern Family (vertical comedy series concept, German, 12 slides)
