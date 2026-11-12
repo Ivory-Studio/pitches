@@ -195,6 +195,12 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; font-size:
 .cmp figcaption i { font-family: var(--italic); font-size: 15px; color: var(--muted); }
 .cmp figcaption span { margin-top: 8px; font-size: 15px; line-height: 1.5; color: var(--soft); }
 @media (max-width: 900px) { .compare { grid-template-columns: minmax(0, 1fr); } }
+
+.variants { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; background: var(--line); border-top: 1px solid var(--line); }
+.variant { background: var(--bg); padding: 20px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.variant .calc-line { font-size: 13px; color: var(--dim); font-variant-numeric: tabular-nums; }
+.variant b { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; letter-spacing: -0.05em; line-height: 0.9; font-variant-numeric: tabular-nums; }
+@media (max-width: 520px) { .variants { grid-template-columns: minmax(0, 1fr); } }
 </style>
 </head>
 <body>
@@ -372,7 +378,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; font-size:
     <div class="left">
       <div class="label">Konkretes Angebot · David Parry · ET 21.04.2027</div>
       <div class="code" aria-hidden="true">10 15</div>
-      <h2 style="font-size: clamp(2.2rem, 5vw, 3.8rem)">Numbers.<br>Essential + TV.</h2>
+      <h2 style="font-size: clamp(2.2rem, 5vw, 3.8rem)">Numbers.<br>In drei Varianten.</h2>
       <p class="lede">Wir setzen eure Traileridee 2 um: große Typo als Countdown, dazwischen rasend kurze Thriller-Bilder, am Ende Buch- und Hörbuchcover mit „Jeder könnte das nächste Opfer sein.“</p>
       <ul class="count">
         <li>12 Vermisste</li>
@@ -388,10 +394,13 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; font-size:
         <div class="row"><dt>Meta Reels</dt><dd>9:16 · 1440×2560 · CTA „Jetzt neu“</dd></div>
         <div class="row"><dt>Meta Feed</dt><dd>1:1 · 1080×1080 · CTA „Jetzt neu“</dd></div>
         <div class="row"><dt>Sky</dt><dd>MXF OP1a · XDCAM HD 4:2:2 1080i, 50 Mbit · 8 Spuren (1+2, 3+4 PGM) · 24 Bit / 48 kHz · −23 LUFS · 5 Black Frames</dd></div>
-        <div class="row"><dt>Essential</dt><dd class="num">1.200 €</dd></div>
-        <div class="row"><dt>TV-Version</dt><dd class="num">490 €</dd></div>
       </dl>
-      <div class="sum"><span>Gesamt netto · 4 Deliverables</span><b>1.690 €</b></div>
+      <div class="variants">
+        <div class="variant"><span class="label">01 · Essential</span><span class="calc-line">1.200 € + 490 € TV</span><b>1.690 €</b></div>
+        <div class="variant"><span class="label">02 · Signature</span><span class="calc-line">2.400 € + 490 € TV</span><b>2.890 €</b></div>
+        <div class="variant"><span class="label">03 · Premium</span><span class="calc-line">4.300 € + 490 € TV</span><b>4.790 €</b></div>
+      </div>
+      <div class="sum"><span>Netto · je Variante 4 Deliverables inkl. Sky-Fassung</span></div>
     </div>
   </div>
 </section>
