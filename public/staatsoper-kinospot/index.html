@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Haus der Begegnung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Stil C "Bühne frei": randlose Bilder, Samtrot, Plakatschrift, Timecodes */
+:root {
+  --bg: #140809;
+  --bg-2: #1E0D0F;
+  --line: rgba(212,175,106,0.28);
+  --gold: #D4AF6A;
+  --ivory: #F5ECDD;
+  --body: #C9B9A8;
+  --mute: #8F7F72;
+  --poster: 'Anton', Impact, 'Arial Narrow', sans-serif;
+  --text: 'Inter', Arial, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--body); font-family: var(--text); font-size: 17px; line-height: 1.6; }
+.pad { padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); }
+.inner { max-width: 1280px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--poster); font-weight: 400; text-transform: uppercase; color: var(--ivory); margin: 0; text-wrap: balance; letter-spacing: 0.005em; }
+p { margin: 0; }
+.mono { font-family: var(--mono); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; }
+.gold { color: var(--gold); }
+a { color: var(--gold); }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+/* Header */
+.top { position: absolute; left: 0; right: 0; top: 0; z-index: 3; padding-top: max(24px, env(safe-area-inset-top, 0px)); }
+.top .inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 12px; color: var(--ivory); font-size: 14px; letter-spacing: 0.1em; white-space: nowrap; }
+.brand img { height: 20px; width: auto; display: block; }
+.top .mono { color: var(--ivory); }
+
+/* Hero */
+.hero { position: relative; min-height: 720px; height: 92vh; max-height: 980px; overflow: hidden; display: flex; align-items: flex-end; }
+.hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; filter: brightness(.6) saturate(.95); animation: push 2600ms cubic-bezier(.2,.6,.2,1) both; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--bg) 0%, rgba(20,8,9,.25) 55%, rgba(20,8,9,.6) 100%); }
+.hero .inner { position: relative; z-index: 2; width: 100%; padding-bottom: 56px; display: flex; flex-direction: column; gap: 14px; }
+.hero h1 { font-size: clamp(64px, 13vw, 210px); line-height: .86; }
+.hero .row { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; border-top: 1px solid rgba(212,175,106,.5); padding-top: 20px; }
+.hero .claim { font-size: clamp(20px, 2.2vw, 28px); line-height: 1.3; color: var(--ivory); }
+@keyframes push { from { transform: scale(1.06); } }
+
+/* Nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: rgba(20,8,9,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.nav .inner { display: flex; gap: 28px; overflow-x: auto; padding-block: 14px; scrollbar-width: none; }
+.nav a { color: var(--body); text-decoration: none; white-space: nowrap; }
+.nav a:hover { color: var(--ivory); }
+
+/* Sections */
+section.block { padding-block: 104px 0; }
+.kick { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; border-top: 2px solid var(--gold); padding-top: 14px; margin-bottom: 40px; }
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; }
+.two h2 { font-size: clamp(40px, 5vw, 68px); line-height: .98; }
+.lead { font-size: 20px; line-height: 1.65; color: var(--ivory); max-width: 62ch; }
+.pillars { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: 64px; }
+.pillars > div { border-top: 1px solid var(--line); padding-top: 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.pillars p:not(.mono) { font-size: 15.5px; }
+.rule { margin-top: 40px; padding: 22px 26px; background: var(--bg-2); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.rule p:not(.mono) { color: var(--ivory); font-size: 15.5px; margin-top: 6px; }
+
+/* Moodfilm */
+.film { position: relative; aspect-ratio: 992 / 432; max-width: 100%; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); }
+.film video { width: 100%; height: 100%; object-fit: contain; display: block; background: #000; }
+.film .ph { text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; padding: 24px; }
+.film .ph .big { font-family: var(--poster); font-size: clamp(28px, 4vw, 52px); color: var(--ivory); text-transform: uppercase; line-height: 1; }
+.film-meta { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 14px; color: var(--mute); font-size: 14px; }
+
+/* Moods */
+.moods { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 14px; }
+.mood { margin: 0; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+.mood img { width: 100%; aspect-ratio: 992 / 432; object-fit: cover; display: block; background: #000; }
+.mood figcaption { display: flex; flex-direction: column; gap: 4px; }
+.mood p:not(.mono) { color: var(--ivory); font-size: 15px; line-height: 1.45; }
+
+/* Script table */
+.phase { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 32px; margin-top: 56px; }
+.phase:first-of-type { margin-top: 0; }
+.phase-h { position: sticky; top: 72px; align-self: start; display: flex; flex-direction: column; gap: 10px; }
+.phase-h h3 { font-size: 44px; line-height: .95; }
+.phase-h p:not(.mono) { font-size: 14.5px; color: var(--mute); }
+.shots { border-top: 1px solid var(--line); }
+.shot { display: grid; grid-template-columns: 92px minmax(0, 1.5fr) minmax(0, 1fr); gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.shot .tc { font-family: var(--mono); font-size: 14px; color: var(--gold); font-variant-numeric: tabular-nums; padding-top: 2px; }
+.shot .img { color: var(--ivory); font-size: 16px; }
+.shot .img b { font-weight: 600; }
+.shot .snd { font-size: 14.5px; color: var(--body); }
+.shot .snd::before { content: "Ton"; display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); margin-bottom: 2px; }
+.shot.cut { background: linear-gradient(90deg, rgba(212,175,106,.12), rgba(212,175,106,0)); }
+.shot.cut .snd { color: var(--ivory); }
+.shot.cut .snd::before { content: "Ton · Musik setzt ein"; color: var(--gold); }
+
+.wide-img { margin-top: 104px; position: relative; height: 520px; overflow: hidden; }
+.wide-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(.55); }
+.wide-img .cap { position: absolute; left: 0; right: 0; bottom: 0; padding-bottom: 36px; }
+.wide-img .cap .inner { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.wide-img h2 { font-size: clamp(36px, 6vw, 88px); line-height: .9; }
+
+/* Long version */
+details.part { border-top: 1px solid var(--line); }
+details.part:last-of-type { border-bottom: 1px solid var(--line); }
+details.part summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 160px minmax(0, 1fr) 32px; gap: 24px; align-items: baseline; padding: 24px 0; }
+details.part summary::-webkit-details-marker { display: none; }
+details.part summary h3 { font-size: clamp(30px, 3.4vw, 44px); line-height: 1; }
+details.part summary .sub { display: block; font-family: var(--text); text-transform: none; font-size: 15.5px; color: var(--body); margin-top: 8px; letter-spacing: 0; }
+details.part summary .tog { font-family: var(--mono); color: var(--gold); font-size: 22px; text-align: right; }
+details.part[open] summary .tog { transform: rotate(45deg); }
+details.part .shots { margin-bottom: 32px; }
+.end-row { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--line); color: var(--ivory); }
+
+/* Cast */
+.cast { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.person { border-top: 2px solid var(--gold); padding-top: 18px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.person h3 { font-size: 34px; line-height: 1; }
+.person ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.person li { font-size: 15px; padding-left: 16px; position: relative; }
+.person li::before { content: ""; position: absolute; left: 0; top: .72em; width: 6px; height: 1px; background: var(--gold); }
+
+/* Production */
+.prod { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 56px; }
+.prod > div { border-top: 1px solid var(--line); padding: 22px 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.prod h3 { font-size: 26px; line-height: 1; }
+.prod p:not(.mono) { font-size: 15.5px; }
+
+/* Endcard */
+.endcard { margin-top: 120px; padding-block: 120px; background: #000; text-align: left; }
+.endcard h2 { font-size: clamp(40px, 7vw, 108px); line-height: .9; }
+.endcard p.claimline { margin-top: 24px; font-size: clamp(20px, 2.4vw, 30px); color: var(--ivory); }
+footer { padding-block: 28px 40px; color: var(--mute); font-size: 13px; }
+footer .inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+@media (max-width: 960px) {
+  .two { grid-template-columns: 1fr; gap: 28px; }
+  .pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .phase { grid-template-columns: 1fr; gap: 20px; }
+  .phase-h { position: static; }
+  .cast { grid-template-columns: 1fr; }
+  .moods { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  section.block { padding-block: 72px 0; }
+  .pillars, .rule, .prod { grid-template-columns: 1fr; }
+  .shot { grid-template-columns: 64px minmax(0, 1fr); }
+  .shot .snd { grid-column: 2; }
+  details.part summary, .end-row { grid-template-columns: 1fr 28px; }
+  details.part summary .mono { grid-column: 1 / -1; }
+  .end-row { grid-template-columns: 1fr; }
+  .hero { min-height: 600px; height: 86vh; }
+  .wide-img { height: 360px; }
+  .moods { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .hero > img { animation: none; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+
+<header class="top pad">
+  <div class="inner">
+    <p class="mono">Bayerische Staatsoper · Kinospot</p>
+    <div class="brand"><img src="img/ivory-logo.png" alt="IVORY"><span>creative studio</span></div>
+  </div>
+</header>
+
+<div class="hero pad">
+  <img src="img/mf-aussen.jpg" alt="Das Nationaltheater bei Nacht, Gäste kommen über den Max-Joseph-Platz (Moodfilm)">
+  <div class="inner">
+    <p class="mono gold">TC 00:00:00:00 — 00:00:30:00 · Kino 7.1</p>
+    <h1>Haus der<br>Begegnung</h1>
+    <div class="row">
+      <p class="claim">„Bayerische Staatsoper. Ein Haus für alle.“</p>
+      <p class="mono">Kinospot 30 Sek. · Langversion 1:30 Min.</p>
+    </div>
+  </div>
+</div>
+
+<nav class="nav pad" aria-label="Kapitel">
+  <div class="inner mono">
+    <a href="#idee">Idee</a>
+    <a href="#moodfilm">Moodfilm</a>
+    <a href="#moods">Moods</a>
+    <a href="#spot">Spot 30 Sek.</a>
+    <a href="#figuren">Figuren</a>
+    <a href="#lang">Langversion 1:30</a>
+    <a href="#produktion">Produktion</a>
+  </div>
+</nav>
+
+<main>
+  <section class="block pad" id="idee">
+    <div class="inner">
+      <div class="kick"><p class="mono gold">Die Idee</p><p class="mono">01</p></div>
+      <div class="two">
+        <h2>Eine Piazza, auf die abends alle kommen</h2>
+        <p class="lead">Die Oper ist ein Haus der Begegnung. Der Film zeigt die Begegnungen vor der Vorstellung nah, laut und in Bewegung. Er endet im dunklen Saal, wo alle in einem Moment dasselbe fühlen.</p>
+      </div>
+      <div class="pillars">
+        <div><p class="mono gold">Bildsprache</p><p>Balenciaga-Ästhetik. Große, ruhige Einstellungen wie im Fashion-Shooting, Blicke direkt in die Kamera. Weitwinkel, Untersicht, Vogelperspektive, Schnorchelobjektiv.</p></div>
+        <div><p class="mono gold">Figuren</p><p>Zwei Gäste-Geschichten: Mutter (40) mit Tochter (um die 19) und ein älteres, sehr gestyltes Paar. Dazu eine edgy Freundesgruppe um die 30.</p></div>
+        <div><p class="mono gold">Musik</p><p>Bis zum Saal nur Sounddesign, etwas lauter als gewohnt. Mit dem Sprung in den Saal sind wir mitten im Walkürenritt, gespielt vom Bayerischen Staatsorchester, im Kino aus allen Richtungen.</p></div>
+        <div><p class="mono gold">Claim</p><p>„Bayerische Staatsoper. Ein Haus für alle.“</p></div>
+      </div>
+      <div class="rule">
+        <div><p class="mono gold">Regel 1</p><p>Die Bühne ist nie im Bild.</p></div>
+        <div><p class="mono gold">Regel 2</p><p>Im Saal ist es dunkel, die Vorstellung läuft.</p></div>
+        <div><p class="mono gold">Regel 3</p><p>Das Orchester sehen wir als Graben, Bögen und Dirigenten.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block pad" id="moodfilm">
+    <div class="inner">
+      <div class="kick"><p class="mono gold">Moodfilm</p><p class="mono">Spot 30 Sek. · v5 mit Soundebene · Draft</p></div>
+      <div class="film" id="film">
+        <video controls playsinline preload="metadata" poster="img/mf-foyer.jpg" aria-label="Moodfilm Haus der Begegnung, Spot 30 Sekunden">
+          <source src="film/moodfilm-v5.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="film-meta"><p>Draft mit Soundebene. Die Musik ist ein KI-Platzhalter, nicht die Aufnahme des Staatsorchesters.</p><p class="mono">00:26 · 2.3:1</p></div>
+    </div>
+  </section>
+
+  <section class="block pad" id="moods">
+    <div class="inner">
+      <div class="kick"><p class="mono gold">Moods</p><p class="mono">Standbilder aus dem Moodfilm</p></div>
+      <div class="moods">
+        <figure class="mood"><img src="img/mf-treppe.jpg" alt="Das ältere Paar steht still auf der Treppe, sie schaut direkt in die Kamera. (Standbild aus dem Moodfilm)" loading="lazy"><figcaption><p class="mono gold">Untersicht</p><p>Das ältere Paar steht still auf der Treppe, sie schaut direkt in die Kamera.</p></figcaption></figure>
+        <figure class="mood"><img src="img/mf-einlass.jpg" alt="Weitwinkel unter dem Kugellüster, die Mutter reicht zwei Karten. (Standbild aus dem Moodfilm)" loading="lazy"><figcaption><p class="mono gold">Einlass</p><p>Weitwinkel unter dem Kugellüster, die Mutter reicht zwei Karten.</p></figcaption></figure>
+        <figure class="mood"><img src="img/mf-schuhe.jpg" alt="Lackpumps auf Marmor, jeder Schritt einzeln und etwas zu laut. (Standbild aus dem Moodfilm)" loading="lazy"><figcaption><p class="mono gold">Schritte</p><p>Lackpumps auf Marmor, jeder Schritt einzeln und etwas zu laut.</p></figcaption></figure>
+        <figure class="mood"><img src="img/mf-garderobe.jpg" alt="Garderobentresen senkrecht von oben: Hände, Mäntel, Messingmarken. (Standbild aus dem Moodfilm)" loading="lazy"><figcaption><p class="mono gold">Vogelperspektive</p><p>Garderobentresen senkrecht von oben: Hände, Mäntel, Messingmarken.</p></figcaption></figure>
+        <figure class="mood"><img src="img/mf-foyer.jpg" alt="Frontal zwischen zwei Säulen, ausdrucksloser Blick in die Kamera. (Standbild aus dem Moodfilm)" loading="lazy"><figcaption><p class="mono gold">Fashion-Shot</p><p>Frontal zwischen zwei Säulen, ausdrucksloser Blick in die Kamera.</p></figcaption></figure>
+        <figure class="mood"><img src="img/mf-bar.jpg" alt="Handkamera in der Freundesgruppe, Lachen, Anstoßen. (Standbild aus dem Moodfilm)" loading="lazy"><figcaption><p class="mono gold">Bar</p><p>Handkamera in der Freundesgruppe, Lachen, Anstoßen.</p></figcaption></figure>
+        <figure class="mood"><img src="img/mf-buzzcut.jpg" alt="Die Frau mit Buzzcut im Silberkleid schaut auf uns herab. (Standbild aus dem Moodfilm)" loading="lazy"><figcaption><p class="mono gold">Extreme Untersicht</p><p>Die Frau mit Buzzcut im Silberkleid schaut auf uns herab.</p></figcaption></figure>
+        <figure class="mood"><img src="img/mf-graben.jpg" alt="Senkrecht von oben im Dunkeln, Pultlampen und Bögen. (Standbild aus dem Moodfilm)" loading="lazy"><figcaption><p class="mono gold">Graben</p><p>Senkrecht von oben im Dunkeln, Pultlampen und Bögen.</p></figcaption></figure>
+        <figure class="mood"><img src="img/mf-loge.jpg" alt="Dunkel und frontal, alle reglos, sie legt den Kopf auf seine Schulter. (Standbild aus dem Moodfilm)" loading="lazy"><figcaption><p class="mono gold">Loge</p><p>Dunkel und frontal, alle reglos, sie legt den Kopf auf seine Schulter.</p></figcaption></figure>
+        <figure class="mood"><img src="img/mf-dame.jpg" alt="Die alte Dame im Saal, Sonnenbrille, skulpturale Robe. (Standbild aus dem Moodfilm)" loading="lazy"><figcaption><p class="mono gold">Porträt</p><p>Die alte Dame im Saal, Sonnenbrille, skulpturale Robe.</p></figcaption></figure>
+        <figure class="mood"><img src="img/mf-tochter.jpg" alt="Das Licht der Bühne spiegelt sich in den Augen der Tochter. (Standbild aus dem Moodfilm)" loading="lazy"><figcaption><p class="mono gold">Augen</p><p>Das Licht der Bühne spiegelt sich in den Augen der Tochter.</p></figcaption></figure>
+        <figure class="mood"><img src="img/mf-dirigent.jpg" alt="Aus dem Graben von unten im Gegenlicht, Arme hoch. (Standbild aus dem Moodfilm)" loading="lazy"><figcaption><p class="mono gold">Dirigent</p><p>Aus dem Graben von unten im Gegenlicht, Arme hoch.</p></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="block pad" id="spot">
+    <div class="inner">
+      <div class="kick"><p class="mono gold">Kinospot · 30 Sekunden</p><p class="mono">Entspricht dem Moodfilm</p></div>
+      <p class="lead" style="margin-bottom:64px">Von der Piazza vor dem Haus bis zu dem einen Moment im Saal, in dem alle aufstehen.</p>
+
+      <div class="phase">
+        <div class="phase-h"><p class="mono gold">00–15</p><h3>Die Piazza</h3><p>Kurz und auf den Takt geschnitten. Nur Sounddesign, nah und etwas zu laut.</p></div>
+        <div class="shots">
+          <div class="shot"><p class="tc">00–02</p><p class="img"><b>Außen.</b> Das Nationaltheater bei Nacht, symmetrische Totale aus leichter Untersicht. Die Säulen leuchten, von allen Seiten kommen Gäste über den Max-Joseph-Platz wie auf eine Piazza.</p><p class="snd">Schritte auf Pflaster, Stimmen von allen Seiten, eine Tram in der Ferne.</p></div>
+          <div class="shot"><p class="tc">02–04</p><p class="img"><b>Treppe.</b> Weitwinkel, extreme Untersicht. Das ältere Paar steht still auf den Stufen, um sie herum fließen die Gäste. Sie, silberner Bob, schwarze Sonnenbrille, skulpturale Robe, schaut direkt in die Kamera.</p><p class="snd">Absätze auf Stein, Stoff raschelt, nah und etwas zu laut.</p></div>
+          <div class="shot"><p class="tc">04–05</p><p class="img"><b>Schuhe.</b> Schnorchelobjektiv auf Bodenhöhe zwischen den Füßen hindurch: weiße Sneaker, Lackpumps, Oxfords, ein Seidensaum.</p><p class="snd">Jeder Schritt einzeln: Highheels, Sneaker, Ledersohlen.</p></div>
+          <div class="shot"><p class="tc">05–07</p><p class="img"><b>Einlass.</b> Weitwinkel von unten unter dem Kugellüster. Die Mutter reicht zwei Karten, die Tochter legt den Kopf in den Nacken und schaut nach oben.</p><p class="snd">Gemurmel unter der hohen Decke, Kartenabriss.</p></div>
+          <div class="shot"><p class="tc">07–08</p><p class="img"><b>Garderobe.</b> Vogelperspektive senkrecht auf den Tresen: Hände, Mäntel, Messingmarken.</p><p class="snd">Garderobenmarken klacken auf den Tresen, Bügel.</p></div>
+          <div class="shot"><p class="tc">08–10</p><p class="img"><b>Säulenfoyer.</b> Frontal zwischen zwei Säulen, wie ein Fashion-Shot. Er nimmt ihr den Mantel ab, darunter die Robe. Sie schaut ausdruckslos in die Kamera.</p><p class="snd">Mantelstoff gleitet, Highheels auf Marmor.</p></div>
+          <div class="shot"><p class="tc">10–12</p><p class="img"><b>Bar.</b> Handkamera mitten in der Freundesgruppe, Lachen, Anstoßen. Der Mann mit rasiertem Kopf dreht sich und schaut ins Objektiv.</p><p class="snd">Gläser stoßen an, Lachen, Gemurmel der Bar.</p></div>
+          <div class="shot"><p class="tc">12–14</p><p class="img"><b>Tablett.</b> Die Kamera fährt auf einem Silbertablett durch die Menge und stellt ein Glas vor ihm ab. Er nickt, ohne hinzusehen.</p><p class="snd">Das Glas setzt hart auf dem Marmor auf.</p></div>
+          <div class="shot"><p class="tc">14–15</p><p class="img"><b>Untersicht.</b> Vom Boden aus: die Frau mit Buzzcut im Ledertrench über dem Silberkleid schaut auf uns herab.</p><p class="snd">Leder knarzt.</p></div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-h"><p class="mono gold">15–18</p><h3>Der Graben</h3><p>Das Orchester stimmt ein. Dann Stille.</p></div>
+        <div class="shots">
+          <div class="shot"><p class="tc">15–17</p><p class="img"><b>Orchestergraben.</b> Senkrecht von oben im Dunkeln: Pultlampen, Musiker in Schwarz, die Bögen heben sich.</p><p class="snd">Das Orchester stimmt ein: die Oboe gibt den Ton, Streicher, Blech und Pauke durcheinander.</p></div>
+          <div class="shot"><p class="tc">17–18</p><p class="img"><b>Bögen.</b> Schnorchelobjektiv dicht über den Saiten, ein Lichtstrahl, oben schneidet die Hand des Dirigenten ins Bild.</p><p class="snd">Ein Cello stimmt nach, dann Stille.</p></div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-h"><p class="mono gold">18–30</p><h3>Der Saal</h3><p>Dunkel, länger und ruhiger geschnitten. Mitten im Walkürenritt, in 7.1 aus allen Richtungen.</p></div>
+        <div class="shots">
+          <div class="shot cut"><p class="tc">18–21</p><p class="img"><b>Logentür.</b> Im Rangumgang öffnen weiße Handschuhe eine Logentür. Der Blick geht durch die Loge hinüber zu den Rängen.</p><p class="snd">Mit der Tür sind wir mitten im Walkürenritt: voller Orchesterklang aus allen Richtungen des Kinosaals.</p></div>
+          <div class="shot"><p class="tc">21–23</p><p class="img"><b>Volle Loge.</b> Dunkel, frontal, alle Gäste reglos. Die alte Dame legt den Kopf auf die Schulter ihres Mannes.</p><p class="snd">Walkürenritt.</p></div>
+          <div class="shot"><p class="tc">23–24</p><p class="img"><b>Augen.</b> Extremes Close-up der Tochter, das Licht der Bühne spiegelt sich in ihren Augen.</p><p class="snd">Walkürenritt.</p></div>
+          <div class="shot"><p class="tc">24–26</p><p class="img"><b>Dirigent.</b> Aus dem Graben von unten im Gegenlicht, Arme hoch, das Orchester in kleinen Lichtinseln.</p><p class="snd">Das Finale baut sich auf.</p></div>
+          <div class="shot"><p class="tc">26–27</p><p class="img"><b>Logenbrüstung.</b> Der Mann von der Bar lehnt sich vor, die Lässigkeit ist weg, seine Freunde sind still.</p><p class="snd">Walkürenritt.</p></div>
+          <div class="shot"><p class="tc">27–29</p><p class="img"><b>Das Haus steht.</b> Nah und seitlich an einer Reihe entlang: Alle stehen gleichzeitig auf, fast nur Silhouetten und Profile gegen warmes Streiflicht. Keine Totale des Saals.</p><p class="snd">Großes Finale, letzter Schlag, ein Atemzug Stille.</p></div>
+          <div class="shot"><p class="tc">29–30</p><p class="img"><b>Mutter und Tochter.</b> Die Tochter dreht sich um und sieht, dass ihre Mutter weint. Sie nimmt ihre Hand. Schwarz, Claim.</p><p class="snd">Tosender Applaus von allen Seiten.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wide-img">
+    <img src="img/mf-traenen.jpg" alt="Der Mann von der Bar im Saal, Tränen in den Augen (Moodfilm)">
+    <div class="cap pad"><div class="inner"><h2>Alle fühlen<br>dasselbe</h2><p class="mono">Die Bühne bleibt außerhalb des Bildes</p></div></div>
+  </div>
+
+  <section class="block pad" id="figuren">
+    <div class="inner">
+      <div class="kick"><p class="mono gold">Figuren</p><p class="mono">Cast</p></div>
+      <div class="cast">
+        <div class="person">
+          <p class="mono gold">Geschichte 1</p>
+          <h3>Mutter &amp; Tochter</h3>
+          <ul>
+            <li>Mutter, 40, kommt direkt aus dem Büro.</li>
+            <li>Tochter, um die 19, Samtkleid und weiße Sneaker.</li>
+            <li>Am Ende sieht die Tochter, dass ihre Mutter weint, und nimmt ihre Hand.</li>
+          </ul>
+        </div>
+        <div class="person">
+          <p class="mono gold">Geschichte 2</p>
+          <h3>Das ältere Paar</h3>
+          <ul>
+            <li>Sie: silberner Bob, schwarze Sonnenbrille, skulpturale Robe.</li>
+            <li>Er bindet die Fliege, sie zieht sie gerade.</li>
+            <li>In der Loge legt sie den Kopf auf seine Schulter.</li>
+          </ul>
+        </div>
+        <div class="person">
+          <p class="mono gold">Cast</p>
+          <h3>Die Freunde</h3>
+          <ul>
+            <li>Eine edgy Gruppe um die 30, vier Personen.</li>
+            <li>Der Mann mit rasiertem Kopf, die Frau mit Buzzcut im Ledertrench über dem Silberkleid.</li>
+            <li>An der Bar laut und lässig, in der Loge still.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block pad" id="lang">
+    <div class="inner">
+      <div class="kick"><p class="mono gold">Langversion · 1:30 Minuten</p><p class="mono">Drei Teile</p></div>
+      <div class="two" style="margin-bottom:48px">
+        <h2>Wer sich im Foyer streift, findet sich im Saal wieder</h2>
+        <p class="lead">Die Langversion stellt die Figuren vorher in ihrem Alltag vor und lässt ihre Wege sich im Haus kreuzen. Aus Michaels Konzept „Heute Abend gehört uns“ kommen drei Elemente: die Stränge zu Hause, der Match Cut vom Schuh auf die Treppe und die Kamerafahrt durch die Logenwände. Neu ist das Zusammenkommen: Wer sich im Foyer nur gestreift hat, findet sich am Ende im Saal mit einem Blick wieder.</p>
+      </div>
+
+      <details class="part" open>
+        <summary><p class="mono gold">00:00–00:24</p><h3>Teil 1 · Heute Abend<span class="sub">Kein Score, nur Sounddesign. Jede Figur bekommt ein eigenes, stilles Bild.</span></h3><span class="tog" aria-hidden="true">+</span></summary>
+        <div class="shots">
+          <div class="shot"><p class="tc">00–04</p><p class="img"><b>Die alte Dame zu Hause.</b> Vogelperspektive auf ihr Bett, die skulpturale Robe liegt darauf ausgebreitet. Sie steht am Fenster und setzt die Sonnenbrille auf, obwohl es Abend ist.</p><p class="snd">Straße durchs offene Fenster, ein Bügel klackt an der Schranktür.</p></div>
+          <div class="shot"><p class="tc">04–07</p><p class="img"><b>Ihr Mann am Spiegel.</b> Er bindet die Fliege, zum dritten Mal. Sie tritt hinter ihn und zieht sie gerade, ohne ein Wort. Frontal durch den Spiegel.</p><p class="snd">Seide reibt auf Seide, ein kurzes Ausatmen.</p></div>
+          <div class="shot"><p class="tc">07–11</p><p class="img"><b>Die Mutter im Büro.</b> Abendlicht, ein Call läuft. Sie schaut auf die Uhr, sagt „Ich muss los“ und klappt den Laptop zu. Auf dem Handy an die Tochter: „Zieh die schönen Schuhe an.“</p><p class="snd">Stimmen aus dem Laptop, der Deckel klappt hart zu.</p></div>
+          <div class="shot"><p class="tc">11–14</p><p class="img"><b>Die Tochter in ihrem Zimmer.</b> Samtkleid, vor ihr die Pumps und die weißen Sneaker. Sie schaut in die Kamera und nimmt die Sneaker.</p><p class="snd">Das Handy vibriert auf dem Holzboden.</p></div>
+          <div class="shot"><p class="tc">14–18</p><p class="img"><b>Die Freunde.</b> Ein Lastenaufzug, Neonlicht, alle vier stehen frontal nebeneinander wie auf dem Castingbild und schauen ausdruckslos ins Objektiv. Die Frau mit Buzzcut zieht den Ledertrench über das Silberkleid.</p><p class="snd">Neonröhre summt, Leder knarzt, Aufzugsgong.</p></div>
+          <div class="shot"><p class="tc">18–21</p><p class="img"><b>Unterwegs.</b> Tram bei Nacht, im Fenster spiegeln sich Mutter und Tochter nebeneinander. Gegenschnitt: das alte Paar im Fond eines Taxis, ihre Hand auf seiner.</p><p class="snd">Tram auf den Schienen, Blinker im Taxi.</p></div>
+          <div class="shot"><p class="tc">21–24</p><p class="img"><b>Match Cut.</b> Der Sneaker der Tochter steigt aus der Tram und landet im nächsten Bild auf der ersten Stufe des Nationaltheaters.</p><p class="snd">Die Sohle trifft laut auf Stein.</p></div>
+        </div>
+      </details>
+
+      <details class="part">
+        <summary><p class="mono gold">00:24–00:52</p><h3>Teil 2 · Die Piazza<span class="sub">Wie im 30-Sekunden-Spot, aber länger und mit den ersten Berührungen zwischen den Figuren.</span></h3><span class="tog" aria-hidden="true">+</span></summary>
+        <div class="shots">
+          <div class="shot"><p class="tc">24–28</p><p class="img"><b>Außen.</b> Symmetrische Totale, das Haus leuchtet, die Piazza füllt sich von allen Seiten. Die Kamera steht.</p><p class="snd">Schritte auf Pflaster, Stimmen von allen Seiten.</p></div>
+          <div class="shot"><p class="tc">28–31</p><p class="img"><b>Treppe.</b> Extreme Untersicht, das alte Paar steht still im Strom der Gäste, sie schaut in die Kamera.</p><p class="snd">Absätze auf Stein, nah und etwas zu laut.</p></div>
+          <div class="shot"><p class="tc">31–33</p><p class="img"><b>Schuhe.</b> Schnorchelobjektiv auf Bodenhöhe zwischen Sneakern, Lackpumps und Oxfords.</p><p class="snd">Jeder Schritt einzeln.</p></div>
+          <div class="shot"><p class="tc">33–36</p><p class="img"><b>Einlass.</b> Weitwinkel von unten unter dem Kugellüster. Die Mutter reicht zwei Karten, die Tochter legt den Kopf in den Nacken.</p><p class="snd">Gemurmel unter der hohen Decke, Kartenabriss.</p></div>
+          <div class="shot"><p class="tc">36–38</p><p class="img"><b>Garderobe.</b> Senkrecht von oben auf den Tresen: Hände, Mäntel, Messingmarken.</p><p class="snd">Garderobenmarken klacken auf den Tresen.</p></div>
+          <div class="shot"><p class="tc">38–42</p><p class="img"><b>Säulenfoyer.</b> Frontal zwischen zwei Säulen nimmt er ihr den Mantel ab, darunter die Robe. Die Tochter steht ein paar Meter weiter und starrt. Die alte Dame schaut über die Sonnenbrille zurück und nickt ihr kaum merklich zu.</p><p class="snd">Highheels auf Marmor, Gemurmel im Saal nebenan.</p></div>
+          <div class="shot"><p class="tc">42–46</p><p class="img"><b>Bar.</b> Handkamera in der Freundesgruppe, Lachen, Gläser. Die Kamera fährt auf dem Silbertablett über die Köpfe und stellt ein Glas ab.</p><p class="snd">Gläser stoßen an, das Glas setzt hart auf.</p></div>
+          <div class="shot"><p class="tc">46–49</p><p class="img"><b>Begegnung an der Bar.</b> Der alte Herr will zwei Gläser holen, der Mann mit rasiertem Kopf rückt zur Seite und lässt ihn vor. Ein kurzer Blick zwischen beiden, mehr nicht. Danach die Frau mit Buzzcut aus extremer Untersicht.</p><p class="snd">Bar-Gemurmel, Leder knarzt.</p></div>
+          <div class="shot"><p class="tc">49–52</p><p class="img"><b>Gong.</b> Eine Cellistin in Schwarz schiebt sich mit ihrem Koffer durchs Foyer, jemand macht ihr Platz. Alle stellen gleichzeitig die Gläser ab.</p><p class="snd">Gong. Gläser auf Marmor, die Stimmen werden leiser.</p></div>
+        </div>
+      </details>
+
+      <details class="part">
+        <summary><p class="mono gold">00:52–01:24</p><h3>Teil 3 · Der Saal<span class="sub">Dunkel, die Kamera wird ruhig. Die Fahrt durch die Logen trägt den Mittelteil.</span></h3><span class="tog" aria-hidden="true">+</span></summary>
+        <div class="shots">
+          <div class="shot"><p class="tc">52–55</p><p class="img"><b>Orchestergraben.</b> Senkrecht von oben, die Cellistin setzt sich, die Bögen heben sich.</p><p class="snd">Das Orchester stimmt ein: die Oboe gibt den Ton, Streicher, Blech und Pauke durcheinander.</p></div>
+          <div class="shot"><p class="tc">55–57</p><p class="img"><b>Bögen.</b> Schnorchelobjektiv dicht über den Saiten, oben schneidet die Hand des Dirigenten ins Bild.</p><p class="snd">Ein Cello stimmt nach, dann Stille.</p></div>
+          <div class="shot cut"><p class="tc">57–60</p><p class="img"><b>Logentür.</b> Im ruhigen Rangumgang öffnen weiße Handschuhe eine Logentür. Licht fällt in den Gang.</p><p class="snd">Mit der Tür sind wir mitten im Walkürenritt: voller Orchesterklang aus allen Richtungen des Kinosaals.</p></div>
+          <div class="shot"><p class="tc">60–70</p><p class="img"><b>Fahrt durch die Logen.</b> Eine seitliche Fahrt auf Augenhöhe, ohne sichtbaren Schnitt durch zwei Trennwände. Loge A: die Freunde, der Mann lehnt sich nach vorn. Loge B: das alte Paar, sie legt den Kopf auf seine Schulter. Loge C: fremde Gäste, eine Frau dirigiert mit zwei Fingern auf der Armlehne.</p><p class="snd">Walkürenritt, der Raumklang wechselt mit jeder Loge.</p></div>
+          <div class="shot"><p class="tc">70–73</p><p class="img"><b>Parkett.</b> Extremes Close-up der Augen der Tochter. Gegenschnitt: Die Mutter schaut nicht nach vorn, sondern ihre Tochter an.</p><p class="snd">Walkürenritt.</p></div>
+          <div class="shot"><p class="tc">73–77</p><p class="img"><b>Dirigent.</b> Aus dem Graben von unten im Gegenlicht. Dazwischen im Takt halbe Sekunden: die Gesichter aus dem Foyer, eins nach dem anderen.</p><p class="snd">Das Finale baut sich auf.</p></div>
+          <div class="shot"><p class="tc">77–80</p><p class="img"><b>Das Haus steht.</b> Nah und seitlich an einer Reihe entlang: Alle stehen gleichzeitig auf, fast nur Silhouetten und Profile gegen warmes Streiflicht. Keine Totale des Saals.</p><p class="snd">Großes Finale, letzter Schlag, ein Atemzug Stille.</p></div>
+          <div class="shot"><p class="tc">80–84</p><p class="img"><b>Die Blicke.</b> Von Loge zu Loge sehen sich der alte Herr und der Mann von der Bar an und nicken. Die alte Dame schaut hinunter ins Parkett zur Tochter. Die Tochter dreht sich zu ihrer Mutter, sieht, dass sie weint, und nimmt ihre Hand.</p><p class="snd">Tosender Applaus von allen Seiten.</p></div>
+        </div>
+      </details>
+
+      <div class="end-row"><p class="mono gold">01:24–01:30</p><p>Ende. Der Applaus füllt den Kinosaal. Schwarz. „Bayerische Staatsoper. Ein Haus für alle.“ Darunter Spielplan und Karten.</p></div>
+    </div>
+  </section>
+
+  <div class="wide-img">
+    <img src="img/mf-mutter.jpg" alt="Mutter und Tochter im dunklen Saal (Moodfilm)">
+    <div class="cap pad"><div class="inner"><h2>Ein Dreh,<br>zwei Fassungen</h2><p class="mono">30 Sek. · 1:30 Min. · 16:9 · 9:16</p></div></div>
+  </div>
+
+  <section class="block pad" id="produktion">
+    <div class="inner">
+      <div class="kick"><p class="mono gold">Dreh, Musik und Schnitt</p><p class="mono">Produktion</p></div>
+      <div class="prod">
+        <div><h3>Fassungen</h3><p>Beide Fassungen kommen aus einem Dreh: 30 Sekunden fürs Kino, 1:30 Minuten als Langversion, dazu Cut-downs in 16:9 und 9:16.</p></div>
+        <div><h3>Schnittrhythmus</h3><p>Vor dem Saal kurz und auf den Takt geschnitten, viele Einstellungen unter zwei Sekunden. Im Saal länger und ruhiger, damit die Gesichter wirken. Die Stille nach dem letzten Ton bleibt stehen.</p></div>
+        <div><h3>Kamera</h3><p>Handkamera nur im Foyer und an der Bar. Sonst steht die Kamera oder fährt kontrolliert: Weitwinkel aus Untersicht, Vogelperspektive auf Garderobe und Graben, Schnorchelobjektiv für Schuhe und Saiten.</p></div>
+        <div><h3>Logenfahrt</h3><p>Drei gedrehte Teilstücke mit gleicher Höhe, Blickachse und Geschwindigkeit. Die Wandübergänge entstehen in der Postproduktion aus Clean Plates und vermessener Wandgeometrie. Vor dem Hauptdreh testen wir einen Übergang.</p></div>
+        <div><h3>Musik</h3><p>Bis zur Logentür reines Sounddesign, etwas lauter als normal. Ab der Tür eine Aufnahme des Walkürenritts mit dem Staatsorchester, mitten im Stück eingestiegen, in 7.1 aus allen Richtungen bis zum Finale und zum Applaus. Für 30 Sekunden und 1:30 Minuten je ein eigener Schnitt der Partitur. „Die Walküre“ wurde 1870 im Nationaltheater uraufgeführt.</p></div>
+        <div><h3>Licht im Saal</h3><p>Dunkel, die Gesichter nur vom Licht der Bühne getroffen, das außerhalb des Bildes bleibt. Im Saal nur Close-ups, Porträts und Silhouetten, keine Totalen mit Hunderten Menschen.</p></div>
+        <div><h3>Drehtage</h3><p>30-Sekunden-Fassung: ein Drehtag während einer Abendvorstellung plus Saal-Tableaus mit Komparsen. Die Langversion braucht zusätzlich einen Tag für die Wohnungen, das Büro, Aufzug und Tram sowie die Logenfahrt.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="endcard pad">
+    <div class="inner">
+      <p class="mono gold">Schwarz. Claim.</p>
+      <h2 style="margin-top:18px">Bayerische Staatsoper.<br>Ein Haus für alle.</h2>
+      <p class="claimline">Haus der Begegnung · Kinospot</p>
+    </div>
+  </section>
+</main>
+
+<footer class="pad">
+  <div class="inner">
+    <span>IVORY creative studio · Konzept für die Bayerische Staatsoper · November 2026</span>
+    <span>Alle Bilder: Standbilder aus dem Moodfilm (Draft), keine Aufnahmen der Staatsoper</span>
+  </div>
+</footer>
+
+</body>
+</html>

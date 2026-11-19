@@ -12,3 +12,4 @@ Site files live in `public/`. Run `npm run dev` for a local preview.
 - `/leger-vertical/` · LeGer by Lena Gercke (vertical branded content series, three directions, German)
 - `/audi-modern-family/` · Audi – Modern Family (vertical comedy series concept, German, 12 slides)
 - `/goldmann-trailer-t1z5c4/` · Goldmann – Buchtrailer-Preismatrix (drei Stufen, Staffelrabatt, Angebot „Numbers“, German)
+- `/staatsoper-kinospot/` · Bayerische Staatsoper – Haus der Begegnung (Kinospot 30 Sek. und Langversion 1:30, Moodfilm, German)
